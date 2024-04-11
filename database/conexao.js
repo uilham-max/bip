@@ -7,6 +7,7 @@ const conexao = new Sequelize('bip_db', 'postgres', 'postgres', {
   define: {
     freezeTableName: true,
   },
+  logging: false
 });
 
 module.exports = conexao;
