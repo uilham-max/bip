@@ -5,8 +5,10 @@ const conexao = new Sequelize('bip_db', 'postgres', 'postgres', {
   dialect: 'postgresql',
   timezone: '-03:00',
   define: {
-    freezeTableName: true,
+    freezeTableName: true, 
   },
+  logging: false
 });
+
 
 module.exports = conexao;
