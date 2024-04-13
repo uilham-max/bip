@@ -3,10 +3,7 @@ const router = express.Router()
 
 const demandanteController = require("../controller/demandanteController")
 
-router.post('/insert', demandanteController.insert)
+router.post('/novo', demandanteController.postCriarDemandante)
 
 module.exports = router
-
-
-
 
