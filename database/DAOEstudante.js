@@ -1,5 +1,5 @@
-const {Estudante, Estudante, Estudante} = require('../model/index');
-const sequelize = require('./sequelize');
+const {Estudante} = require('../model/index');
+const {conexao} = require('./conexao');
 const {QueryTypes} = require('sequelize');
 
 class DAOEstudante {
