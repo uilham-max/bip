@@ -2,9 +2,25 @@ const { Demandante } = require('../model/index')
 
 class DAODemandante{
 
-    static async insert(nome, email, senha, cpf, endereco){
+
+    static async login(email){
+        let demandante = await Demandante.findOne({where: {email: email}})
         try{
-            const demandante = await Demandante.create({nome, email, senha, cpf, endereco})
+            if(demandante){
+                    return demandante
+            } else {
+                return undefined
+            }
+        } catch(erro){
+            console.log(erro.toString);
+            return undefined
+        }
+        
+    }
+
+    static async insert(nome, email, senha, cpf, cep, logradouro, complemento, bairro, localidade, uf, numero_da_casa){
+        try{
+            const demandante = await Demandante.create({nome, email, senha, cpf, cep, logradouro, complemento, bairro, localidade, uf, numero_da_casa})
             return demandante
         }catch(erro){
             console.error(erro.toString());
