@@ -12,6 +12,16 @@ const postCriarDemandante = async (req, res) => {
     
 }
 
+const getListarDemandates = async (req, res) => {
+    let demandantes = await DAODemandante.getAll()
+    if(!demandantes){
+        console.log("erro.");
+    }
+    // console.log(demandantes);
+    res.send(demandantes)
+}
+
 module.exports = {
     postCriarDemandante,
+    getListarDemandates,
 }

@@ -13,6 +13,16 @@ class DAODemandante{
 
     }
 
+    static async getAll(){
+        try{
+            const demandantes = await Demandante.findAll()
+            return demandantes
+        }catch(erro){
+            console.error(erro.toString());
+            return undefined
+        }
+    }
+
 }
 
 module.exports = DAODemandante
