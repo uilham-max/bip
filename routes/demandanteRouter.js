@@ -3,10 +3,11 @@ const router = express.Router()
 
 const demandanteController = require("../controller/demandanteController")
 
-router.post('/novo', demandanteController.postCriarDemandante)
-router.get('/lista', demandanteController.getListarDemandates)
-// router.get('/login', demandanteController.getLogin)
+router.get('/novo', demandanteController.getNovoDemandante)
+router.post('/novo', demandanteController.postNovoDemandante)
+router.get('/login', demandanteController.getLogin)
 router.post('/login', demandanteController.postLogin)
+router.get('/lista', demandanteController.getListarDemandates)
 
 
 module.exports = router
