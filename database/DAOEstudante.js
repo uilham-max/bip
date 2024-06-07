@@ -1,14 +1,29 @@
 const {Estudante} = require('../model/index');
 const {conexao} = require('./conexao');
 const {QueryTypes} = require('sequelize');
+const bcrypt = require('bcrypt');
 
 class DAOEstudante {
+  static async login(email, senha) {
+    try {
+      let estudante = await Estudante.findOne({where: {email: email}});
+      if (estudante) {
+        if (bcrypt.compareSync(senha, estudante.senha)) {
+          return estudante;
+        }
+        return false;
+      }
+    } catch (error) {
+      console.log(error.toString());
+      return false;
+    }
+  }
   static async insert(nome, email, senha, cpf, endereco, curso, semestre, matricula) {
     try {
       return await Estudante.create({
         nome: nome,
         email: email,
-        senha: senha,
+        senha: bcrypt.hashSync(senha, 10),
         cpf: cpf,
         endereco: endereco,
         curso: curso,
@@ -27,7 +42,7 @@ class DAOEstudante {
         {
           nome: nome,
           email: email,
-          senha: senha,
+          senha: bcrypt.hashSync(senha, 10),
           cpf: cpf,
           endereco: endereco,
           curso: curso,

@@ -1,5 +1,12 @@
 const {DAOEstudante} = require('../database/DAOEstudante');
 
+const getLogin = (req, res) => {
+  res.render('estudante/login', {msg: ''});
+};
+const getLogout = (req, res) => {
+  req.session.destroy();
+  res.redirect('/'); // <-- redireciona para pagina inicial
+};
 const getNovoEstudante = (req, res) => {
   res.render('estudante/novoEstudante', {msg: ''});
 };
