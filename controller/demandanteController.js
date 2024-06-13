@@ -17,6 +17,11 @@ const getLogin = async (req, res) => {
     res.render('demandante/login', {user: demandanteNome(req, res), mensagem: ""})
 }
 
+const getLogout = async (req, res) => {
+    req.session.demandante = undefined
+    res.redirect('/')
+}
+
 
 const postLogin = async (req, res) => {
     let {email, senha} = req.body
@@ -180,5 +185,6 @@ module.exports = {
     postNovoDemandante,
     getLogin,
     postLogin,
+    getLogout,
     getListarDemandates,
 }

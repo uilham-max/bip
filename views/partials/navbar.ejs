@@ -37,14 +37,14 @@
           <% if(user != ''){ %>
             <li class="dropdown-item">  
               <i class="bi bi-person-fill  fs-4"></i>  
-              <a href="/cliente/minhas-reservas"><%=user.email%></a>
+              <a href="#"><%=user.email%></a>
             </li>
           <% }else{%>
             <li class="dropdown-item" >
               <!-- <i class="fa fa-user fs-3"></i> -->
               <!-- <i class="bi-alarm"></i> -->
               <i class="bi bi-box-arrow-in-right fs-4" ></i>
-              <a href="/login">Entrar</a>
+              <a href="/tipoUsuarioLogin">Entrar</a>
             </li>
           <%}%>
           
@@ -52,12 +52,12 @@
           <% if(user != ''){ %>
             <li class="dropdown-item ">   
               <i class="bi bi-arrow-left-right  fs-4"></i>  
-              <a href="/login">Trocar usuário</a>
+              <a href="/tipoUsuarioLogin">Trocar usuário</a>
             </li>
           <% }else{ %>
             <li class="dropdown-item">
               <i class="bi bi-person-fill-add  fs-4"></i>
-              <a  href="/cadastro">Criar conta</a>
+              <a  href="/tipoUsuario">Criar conta</a>
             </li>
           <% } %>
           
@@ -66,7 +66,7 @@
             <hr>
             <li class="dropdown-item">   
               <i class="bi bi-box-arrow-in-left   fs-4" ></i> 
-              <a href="/cliente/logout">Sair</a>   
+              <a href="/demandante/logout">Sair</a>   
             </li>
           <% } %>
 

@@ -8,11 +8,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/tipoUsuario', (req, res) => {
-  res.render('tipoUsuario', {mensagem: ""})
+  res.render('tipoUsuario', {user: demandanteNome(req, res),mensagem: ""})
 })
 
 router.get('/tipoUsuarioLogin', (req, res) => {
-  res.render('tipoUsuarioLogin', {mensagem: ""})
+  res.render('tipoUsuarioLogin', {user: demandanteNome(req, res),mensagem: ""})
 })
 
 module.exports = router;
