@@ -1,0 +1,89 @@
+<nav class="navbar bg-body-tertiary fixed-top" data-bs-theme="dark">
+  <div class="container-fluid">
+    
+    <!-- Icone do menu -->
+    <button style="border-width: 0;" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <!-- <span class="navbar-toggler-icon fs-6"></span> -->
+      <span class="bi bi-list fs-3"></span>
+    </button>
+
+    
+    <!-- <a class="navbar-brand" href="#">Offcanvas navbar</a> -->
+    <a href="/">
+      <img src="/img/logoimage.png" alt="Logo" width="160" height="25" class="d-inline-block align-text-center">
+    </a>  
+
+
+
+    <!-- Icone do usuario -->
+    <div class="btn-group dropstart">
+      <div class="dropdown">
+        
+        <!-- mostra botão ou nome do usuário logado -->
+        <button style="border-width: 0;" class="navbar-toggler" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="bi bi-person-fill fs-3" aria-hidden="true"></span>
+        </button>
+        
+
+
+        <ul class="dropdown-menu">
+
+ 
+            <li class="dropdown-item" >
+              <!-- <i class="fa fa-user fs-3"></i> -->
+              <!-- <i class="bi-alarm"></i> -->
+              <i class="bi bi-box-arrow-in-right fs-4" ></i>
+              <a href="/login">Entrar</a>
+            </li>
+          
+
+            <li class="dropdown-item">
+              <i class="bi bi-person-fill-add  fs-4"></i>
+              <a  href="/demandante/novo">Registrar demandante</a>
+            </li>
+          
+
+            <hr>
+            <li class="dropdown-item">   
+              <i class="bi bi-box-arrow-in-left   fs-4" ></i> 
+              <a href="/cliente/logout">Sair</a>   
+            </li>
+
+        </ul>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Icone do menu -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">BiP</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Ir para Início</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cliente/minhas-reservas">Registrar Problema</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Registrar solução</a>
+          </li>
+        </ul>
+        <!-- <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form> -->
+      </div>
+    </div>
+
+
+
+  </div>
+</nav>

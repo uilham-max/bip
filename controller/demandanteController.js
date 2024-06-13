@@ -46,27 +46,26 @@ const getNovoDemandante = async (req, res) => {
 const postNovoDemandante = async (req, res) => {
     let {nome, email, senha, repeteSenha, cpf, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa} = req.body
 
+    console.log(req.body);
 
     // Não permite numeros ou caracteres especiais no nome
     if(!(/^[a-zA-ZÀ-ÿ\s]+$/.test(nome))){
-        res.send({
-            "mensagem": "Erro. Números ou caracteres epeciais."
-        })
+        res.render('erro', {mensagem: "erro no nome"})
         return
     }
 
     // Menos de 2 ou mais de 100 caracteres no nome
     if(nome.length < 5 || nome.length > 100){
-        res.send({
-            "mensagem": "Erro. Deve ter entre 5 e 100 caracteres."
+        res.render('erro',{
+            mensagem: "Erro. Deve ter entre 5 e 100 caracteres."
         })
         return
     }
 
     // Verifica o tamanho da senha
     if(senha.length < 8 || senha != repeteSenha){
-        res.send({
-            "mensagem": "Erro. A senha de ter mais de 8 dígitos."
+        res.render('erro',{
+            mensagem: "Erro. A senha de ter mais de 8 dígitos."
         })
         return
     }
@@ -76,16 +75,16 @@ const postNovoDemandante = async (req, res) => {
       
     // O CPF deve ter 11 dígitos numéricos
     if (cpf.length !== 11 || !/^\d{11}$/.test(cpf)) {
-    res.send({
-        "mensagem": "Erro. CPF Deve ter 11 dígitos."
+    res.render('erro',{
+        mensagem: "Erro. CPF Deve ter 11 dígitos."
     })
     return;
     } 
 
     // Verifica se todos os dígitos são iguais
     if (/^(\d)\1+$/.test(cpf)) {
-        res.send({
-            "mensagem": "Erro. CPF Com todos dígitos iguais."
+        res.render('erro',{
+            mensagem: "Erro. CPF Com todos dígitos iguais."
         })
         return;
     } 
@@ -99,8 +98,8 @@ const postNovoDemandante = async (req, res) => {
     let digitoVerificador1 = resto === 10 || resto === 11 ? 0 : resto;
 
     if (parseInt(cpf.charAt(9)) !== digitoVerificador1) {
-        res.send({
-            "mensagem": "Erro. CPF Primerio dígito verificador inválido."
+        res.render('erro',{
+            mensagem: "Erro. CPF Primerio dígito verificador inválido."
         })
         return;
     }
@@ -114,8 +113,8 @@ const postNovoDemandante = async (req, res) => {
     let digitoVerificador2 = resto === 10 || resto === 11 ? 0 : resto;
 
     if (parseInt(cpf.charAt(10)) !== digitoVerificador2) {
-        res.send({
-            "mensagem": "Erro. CPF Segundo dígito verificador inválido."
+        res.render('erro',{
+            mensagem: "Erro. CPF Segundo dígito verificador inválido."
         })
         return;
     }
@@ -124,8 +123,8 @@ const postNovoDemandante = async (req, res) => {
     // CEP
     cep.replace(/\D/g, '')
     if(cep.length !== 8){
-        res.send({
-            "mensagem": "Erro. CEP Deve ter 8 dígitos numéricos."
+        res.render('erro',{
+            mensagem: "Erro. CEP Deve ter 8 dígitos numéricos."
         })
         return
     }
@@ -133,8 +132,8 @@ const postNovoDemandante = async (req, res) => {
 
     // Rua
     if(logradouro.length < 2 || logradouro.length > 100){
-        res.send({
-            "mensagem": "Erro. Tamanho de logradouro inválido."
+        res.render('erro',{
+            mensagem: "Erro. Tamanho de logradouro inválido."
         })
       return
     }
@@ -143,8 +142,8 @@ const postNovoDemandante = async (req, res) => {
     // Numero casa
     numeroDaCasa.replace(/\D/g, '')
     if(numeroDaCasa.length < 1 || numeroDaCasa.length > 50000 || numeroDaCasa < 1){
-        res.send({
-            "mensagem": "Erro. Nº inválido."
+        res.render('erro',{
+            mensagem: "Erro. Nº inválido."
         })
         return
     }
@@ -152,8 +151,8 @@ const postNovoDemandante = async (req, res) => {
 
     // Localidade
     if(!/^[a-zA-ZÀ-ÿ\s]+$/.test(localidade) || localidade.length < 2 || localidade.length > 50){
-        res.send({
-            "mensagem": "Erro. Cidade inválida."
+        res.render('erro',{
+            mensagem: "Erro. Cidade inválida."
         })
         return
     }
@@ -161,8 +160,8 @@ const postNovoDemandante = async (req, res) => {
     salt = bcrypt.genSaltSync(10)
     hashSenha = bcrypt.hashSync(senha, salt)
 
-    // res.send({
-    //     "mensagem": "Sucesso.",
+    // res.render({
+    //     mensagem: "Sucesso.",
     //     "hashSenha": hashSenha
     // })
     // return
@@ -173,7 +172,7 @@ const postNovoDemandante = async (req, res) => {
         console.log("erro.");
     }
 
-    res.send(demandante)
+    res.redirect('/')
     
 }
 

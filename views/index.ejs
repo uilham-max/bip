@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+<head>
+    <%-include('./partials/header.ejs')%>
+</head>
+<body  >
+    <%-include('./partials/navbar.ejs')%>
+
+    <div class="conteudo">
+        
+      <!-- Menssagem do topo da página em jumbotron -->
+      <div class="jumbotron jumbotron-fluid">
+          <h1 class="display-4" >Bem-vindo ao Banco de Ideias.</h1>
+          <p class="lead">Buscamos soluções para os problemas da comunidade em diversas áreas.</p>
+      </div>
+      
+      <div class="container" >
+
+        <!-- Conteúdo de cada card -->
+
+      </div>
+
+    </div>
+    <%-include('./partials/footer.ejs')%>
+    
+</body>
 </html>
