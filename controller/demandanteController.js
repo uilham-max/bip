@@ -46,7 +46,7 @@ const postLogin = async (req, res) => {
 }
 
 const getNovoDemandante = async (req, res) => {
-    res.render('demandante/novo')
+    res.render('demandante/novo', {user: demandanteNome(req, res), mensagem:''})
 }
 
 const postNovoDemandante = async (req, res) => {
