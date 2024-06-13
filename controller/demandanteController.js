@@ -40,7 +40,7 @@ const postLogin = async (req, res) => {
 }
 
 const getNovoDemandante = async (req, res) => {
-    res.render('novo')
+    res.render('demandante/novo')
 }
 
 const postNovoDemandante = async (req, res) => {
