@@ -1,6 +1,7 @@
 const express = require('express')
 const DAODemandante = require('../database/DAODemandante')
 const bcrypt = require('bcrypt')
+const { demandanteNome } = require('../helpers/getSessionNome')
 
 
 const getListarDemandates = async (req, res) => {
@@ -13,7 +14,7 @@ const getListarDemandates = async (req, res) => {
 }
 
 const getLogin = async (req, res) => {
-    res.render('login')
+    res.render('demandante/login', {user: demandanteNome(req, res), mensagem: ""})
 }
 
 
@@ -23,17 +24,17 @@ const postLogin = async (req, res) => {
         if(demandante){
             console.log(demandante.email, demandante.senha);
             if(bcrypt.compareSync(senha, demandante.senha)){
+                console.log('teste 1');
                 req.session.demandante = {id: demandante.id, nome: demandante.nome, email: demandante.email}
                 console.log(req.session.demandante.nome, "fez login...");
-                res.send('Demandante logou!')
-                // res.redirect('/')
+                res.redirect('/')
             } else {
-                res.send('Erro no login')
-                // res.render('login', {mensagem: 'Usuário ou senha inválidos.'})
+                console.log('teste 2');
+                res.render('login', {mensagem: 'Usuário ou senha inválidos.'})
             }
         } else {
-            res.send('Usuário ou senha inválidos')
-            // res.render('login', {mensagem: 'Usuário ou senha inválidos.'})
+                console.log('teste 3');
+                res.render('login', {mensagem: 'Usuário ou senha inválidos.'})
         }
     })
 
@@ -44,7 +45,7 @@ const getNovoDemandante = async (req, res) => {
 }
 
 const postNovoDemandante = async (req, res) => {
-    let {nome, email, senha, repeteSenha, cpf, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa} = req.body
+    let {nome, email, senha, repeteSenha, cpf, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa, tipoUsuario} = req.body
 
     console.log(req.body);
 
@@ -160,17 +161,14 @@ const postNovoDemandante = async (req, res) => {
     salt = bcrypt.genSaltSync(10)
     hashSenha = bcrypt.hashSync(senha, salt)
 
-    // res.render({
-    //     mensagem: "Sucesso.",
-    //     "hashSenha": hashSenha
-    // })
-    // return
-
-    // console.log(req.body);
     let demandante = await DAODemandante.insert(nome, email, hashSenha, cpf, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa)
     if(!demandante){
-        console.log("erro.");
+        res.render('erro',{mensagem: "Erro ao inserir demante."})
     }
+    req.session.demandante = {id: demandante.id, nome: demandante.nome, sobrenome: demandante.sobrenome, email: demandante.email}
+
+    console.log('Demandante inserido.');
+    
 
     res.redirect('/')
     

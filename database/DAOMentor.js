@@ -1,7 +1,7 @@
 const { Mentor } = require('../model/index');
 
 
-export default class Mentor {
+class DAOMentor {
 
     static async insert(nome, email, senha, cpf, endereco, areaConhecimento) {
         try{
@@ -14,3 +14,5 @@ export default class Mentor {
     }
 
 }
+
+module.exports = DAOMentor

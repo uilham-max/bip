@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('./partials/header.ejs')%>
+</head>
+<body  >
+    <%-include('./partials/navbar.ejs')%>
+
+    <div class="conteudo">
+        
+      <!-- Menssagem do topo da página em jumbotron -->
+      <div class="jumbotron jumbotron-fluid">
+          <h1 class="display-4" >Acessar conta como</h1>
+          <p class="lead"></p>
+      </div>
+      
+      <div class="container" >
+
+        <!-- Conteúdo de cada card -->
+        <div class="lista-reboques">
+            
+            <!-- demandante -->
+            <!-- <a href="/demandante/login"> -->
+                <div class="card card-index" style="width: 10rem;">
+                    <a href="/demandante/login">
+                        <span class="bi bi-person-fill fs-1" aria-hidden="true"></span>
+                    </a>
+                    <hr>
+                    <div class="card-body">
+                        <h5 class="display-4">Demandante</h5>
+                        <!-- <a href="/demandante/novo" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                </div>
+            <!-- </a> -->
+
+            <!-- estudante -->
+            <a href="/estudante/login">
+                <div class="card card-index" style="width: 10rem;">
+                    <a href="/estudante/login">
+                        <span class="bi bi-person-fill fs-1" aria-hidden="true"></span>
+                    </a>
+                    <hr>
+                    <div class="card-body">
+                        <h5 class="display-4">Estudante</h5>
+                        <!-- <a href="/estudante/novo" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                </div>
+            </a>
+
+            <!-- mentor -->
+            <a href="/mentor/login">
+                <div class="card card-index" style="width: 10rem;">
+                    <a href="/mentor/login">
+                        <span class="bi bi-person-fill fs-1" aria-hidden="true"></span>
+                    </a>
+                    <hr>
+                    <div class="card-body">
+                        <h5 class="display-4">Mentor</h5>
+                        <!-- <a href="/mentor/novo" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                </div>
+            </a>
+                
+
+           
+        </div>
+
+      </div>
+
+    </div>
+    <%-include('./partials/footer.ejs')%>
+    
+</body>
+</html>
