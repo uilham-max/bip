@@ -1,18 +1,18 @@
 var express = require('express');
 var router = express.Router();
-var { demandanteNome } = require('../helpers/getSessionNome')
+var { usuarioNome } = require('../helpers/getSessionNome')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {user: demandanteNome(req, res), mensagem: ''})
+  res.render('index', {user: usuarioNome(req, res), mensagem: ''})
 });
 
 router.get('/tipoUsuario', (req, res) => {
-  res.render('tipoUsuario', {user: demandanteNome(req, res),mensagem: ""})
+  res.render('tipoUsuario', {user: usuarioNome(req, res),mensagem: ""})
 })
 
 router.get('/tipoUsuarioLogin', (req, res) => {
-  res.render('tipoUsuarioLogin', {user: demandanteNome(req, res),mensagem: ""})
+  res.render('tipoUsuarioLogin', {user: usuarioNome(req, res),mensagem: ""})
 })
 
 module.exports = router;

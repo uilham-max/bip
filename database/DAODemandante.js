@@ -2,10 +2,19 @@ const { Demandante } = require('../model/index')
 
 class DAODemandante{
 
+    static async getOne(id){
+        try{
+            console.log('teste1',id);
+            return await Demandante.findByPk(id)
+        } catch(erro) {
+            console.log(erro.toString());
+            return undefined
+        }
+    }
 
     static async login(email){
-        let demandante = await Demandante.findOne({where: {email: email}})
         try{
+            let demandante = await Demandante.findOne({where: {email: email}})
             if(demandante){
                     return demandante
             } else {
