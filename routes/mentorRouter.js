@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const MentorController = require('../controller/MentorController');
+const mentorController = require('../controller/mentorController');
 
-router.get('/', MentorController.home)
+router.get('/', mentorController.home)
 
 
 module.exports = router;
