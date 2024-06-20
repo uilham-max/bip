@@ -35,7 +35,7 @@ class DAOEstudante {
     numero_da_casa
   ) {
     try {
-      return await Estudante.create({
+      let estudante = await Estudante.create({
         nome: nome,
         email: email,
         senha: bcrypt.hashSync(senha, 10),
@@ -51,6 +51,8 @@ class DAOEstudante {
         uf: uf,
         numero_da_casa: numero_da_casa,
       });
+      console.log(estudante);
+      return estudante;
     } catch (error) {
       console.log(error.toString());
       return undefined;

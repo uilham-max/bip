@@ -64,6 +64,7 @@ const postNovoEstudante = async (req, res) => {
       uf,
       numeroDaCasa
     );
+
     if (result) {
       //res.render('estudante/login', {msg: 'Usuário criado com sucesso'});
       console.log('Estudante criado com sucesso');
