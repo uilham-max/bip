@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('../partials/header.ejs')%>
+    <script src="/js/validaCPF.js" ></script>
+    <script src="/js/consome_viacep.js" ></script>
+    <script src="/js/validar_senha.js" ></script>
+</head>
+<body  >
+    
+    <%-include('../partials/navbar.ejs')%>
+    
+    <div class="conteudo" >
+        <div class="jumbotron junbotron-fluid">
+            <h1 class="display-4" >Bem-Vindo à página de cadastro</h1>
+        </div>
+        <div class="container" >
+            <!--  -->
+            <form action="/estudante/novo" method="POST">
+                <div class="lista-reboques">
+
+
+                    <!-- Dados pessoais -->
+                    <div class="card card-reserva" style="width: 25rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">Informações Pessoais</h3>
+                            <hr>
+                                
+                            <div class="form-group">
+                                <label for="nome">Nome</label>
+                                <input class="form-control" id="nome" type="text" name="nome" required>
+                                <div class="valid-feedback">
+                                    <!-- Looks good! -->
+                                </div>
+                                <div class="invalid-feedback">
+                                    Preencha o campo.
+                                </div>
+                            </div>
+
+                                         
+                            <div class="form-group">
+                                <label for="cpf">CPF</label>
+                                <input class="form-control" id="cpf" type="text" name="cpf" required>
+                                <div class="valid-feedback">
+                                    <!-- Looks good! -->
+                                </div>
+                                <div class="invalid-feedback">
+                                    Preencha o campo.
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Dados de endereço -->
+                    <div class="card card-reserva" style="width: 25rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">Infomações de Endereço</h3>
+                            <hr>
+
+                            <div class="form-group">
+                                <label for="cep">CEP</label>
+                                <input class="form-control" id="cep" type="text" name="cep" placeholder="Ex.: 96408560" required>
+                                <div class="valid-feedback">
+                                    <!-- Looks good! -->
+                                </div>
+                                <div class="invalid-feedback">
+                                    Preencha o campo.
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group col">
+                                    <label for="logradouro">Rua</label>
+                                    <input class="form-control" id="logradouro" type="text" name="logradouro" required>
+                                    <div class="valid-feedback">
+                                        <!-- Looks good! -->
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Preencha o campo.
+                                    </div>
+                                </div>
+    
+                                <div class="form-group col">
+                                    <label for="numeroDaCasa">Nº</label>
+                                    <input class="form-control" id="numeroDaCasa" type="text" name="numeroDaCasa"  required>
+                                    <div class="valid-feedback">
+                                        <!-- Looks good! -->
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Preencha o campo.
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label for="complemento">Complemento</label>
+                                <input class="form-control" id="complemento" type="text" name="complemento">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bairro">Bairro</label>
+                                <input class="form-control" id="bairro" type="text" name="bairro"  required>
+                                <div class="valid-feedback">
+                                    <!-- Looks good! -->
+                                </div>
+                                <div class="invalid-feedback">
+                                    Preencha o campo.
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="localidade">Cidade</label>
+                                    <input class="form-control" id="localidade" type="text" name="localidade" required>
+                                    <div class="valid-feedback">
+                                        <!-- Looks good! -->
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Preencha o campo.
+                                    </div>
+                                </div>
+    
+                                <div class="form-group col">
+                                    <label for="uf">UF</label>
+                                    <input class="form-control" id="uf" type="text" name="uf" required>
+                                    <div class="valid-feedback">
+                                        <!-- Looks good! -->
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Preencha o campo.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Dados do login -->
+                    <div class="card card-reserva" style="width: 25rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">Informções de login</h3>
+                            <hr>
+                            <div class="form-group">
+                                <label for="email">Login</label>
+                                <input class="form-control" id="email" type="email" name="email" >
+                                <small class="form-text text-muted">Informe o seu e-mail como login.</small>
+                                <div class="valid-feedback">
+                                    <!-- Looks good! -->
+                                </div>
+                                <div class="invalid-feedback">
+                                    Preencha o campo.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="senha">Senha</label>
+                                <input class="form-control" id="senha" type="password" name="senha" >
+                                <small class="form-text text-muted">No mínimo 8 dígitos.</small>
+                                <div class="valid-feedback">
+                                    <!-- Looks good! -->
+                                </div>
+                                <div class="invalid-feedback">
+                                    Preencha o campo.
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="repeteSenha">Repita a Senha</label>
+                                <input class="form-control" id="repeteSenha" type="password" name="repeteSenha" >
+                                <div class="valid-feedback">
+                                    <!-- Looks good! -->
+                                </div>
+                                <div class="invalid-feedback">
+                                    Preencha o campo.
+                                </div>
+                            </div>
+
+                            
+                            <br><p style="margin: 0.5rem;" >
+                                <input class="btn btn-primary" type="submit" value="Enviar">
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <!--  -->
+        </div>
+    </div>
+
+    <%-include('../partials/footer.ejs')%>
+
+</body>
+</html>

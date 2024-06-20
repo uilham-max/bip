@@ -17,3 +17,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 }); 
+module.exports = valida_senha;

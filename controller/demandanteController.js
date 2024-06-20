@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const { demandanteNome } = require('../helpers/getSessionNome')
 
 
-const getListarDemandates = async (req, res) => {
+const getListarDemandantes = async (req, res) => {
     let demandantes = await DAODemandante.getAll()
     if(!demandantes){
         console.log("erro.");
@@ -186,5 +186,5 @@ module.exports = {
     getLogin,
     postLogin,
     getLogout,
-    getListarDemandates,
+    getListarDemandantes,
 }

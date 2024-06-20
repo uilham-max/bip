@@ -1,5 +1,15 @@
 const {DAOEstudante} = require('../database/DAOEstudante');
 
+
+const getListarEstudantes = async (req, res) => {
+  let demandantes = await DAODemandante.getAll()
+  if(!demandantes){
+      console.log("erro.");
+  }
+  // console.log(demandantes);
+  res.send(demandantes)
+}
+
 const getLogin = (req, res) => {
   res.render('estudante/login', {msg: ''});
 };
@@ -8,7 +18,7 @@ const getLogout = (req, res) => {
   res.redirect('/'); // <-- redireciona para pagina inicial
 };
 const getNovoEstudante = (req, res) => {
-  res.render('estudante/novoEstudante', {msg: ''});
+  res.render('estudante/novo', {msg: ''});
 };
 
 const getEditarEstudante = async (req, res) => {
@@ -61,4 +71,11 @@ const postEditarEstudante = async (req, res) => {
     res.render('error', {msg: 'Falha ao editar usuário'});
   }
 };
-module.exports = {};
+module.exports = {
+  getNovoEstudante,
+  postNovoEstudante,
+  getLogin,
+  postLogin,
+  getLogout,
+  getListarEstudantes,
+}
