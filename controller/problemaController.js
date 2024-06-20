@@ -6,3 +6,6 @@ const getNovo = async (req, res) => {
     res.render('problema/novo', {user: usuarioNome(req, res), mensagem:''})
 }
 
+module.exports = {
+    getNovo,
+}
