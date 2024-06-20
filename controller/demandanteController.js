@@ -23,7 +23,7 @@ const postEditar = async (req, res) => {
 
 
 
-const getListarDemandates = async (req, res) => {
+const getListarDemandantes = async (req, res) => {
     let demandantes = await DAODemandante.getAll()
     if(!demandantes){
         console.log("erro.");
@@ -205,7 +205,4 @@ module.exports = {
     getLogin,
     postLogin,
     getLogout,
-    getListarDemandates,
-    getEditar,
-    postEditar,
 }

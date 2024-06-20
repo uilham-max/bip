@@ -1,5 +1,15 @@
 const {DAOEstudante} = require('../database/DAOEstudante');
 
+
+const getListarEstudantes = async (req, res) => {
+  let demandantes = await DAODemandante.getAll()
+  if(!demandantes){
+      console.log("erro.");
+  }
+  // console.log(demandantes);
+  res.send(demandantes)
+}
+
 const getLogin = (req, res) => {
   res.render('estudante/login', {mensagem: ''});
 };
@@ -20,8 +30,7 @@ const getLogout = (req, res) => {
   res.redirect('/');
 };
 const getNovoEstudante = (req, res) => {
-  res.render('estudante/novo', {user: ''});
-};
+
 
 const getEditarEstudante = async (req, res) => {
   let estudante = await DAOEstudante.getOne(req.session.estudante.id);
@@ -101,6 +110,7 @@ const postEditarEstudante = async (req, res) => {
   }
 };
 module.exports = {
+
   getLogin,
   getLogout,
   getNovoEstudante,
@@ -109,3 +119,4 @@ module.exports = {
   postNovoEstudante,
   postLogin,
 };
+}
