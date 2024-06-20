@@ -1,4 +1,4 @@
-const {Problema} = require('../model/index');
+const {Problema, Demandante} = require('../model/index');
 
 class DAOProblema {
   static async insert(descricao, dataSubmissao, titulo, demandanteId) {
@@ -46,7 +46,7 @@ class DAOProblema {
 
   static async getAll() {
     try {
-      let problemas = await Problema.findAll({order: ['titulo']});
+      let problemas = await Problema.findAll({order: ['titulo'], include: {model: Demandante}});
       return problemas;
     } catch (error) {
       console.log(error.toString());
@@ -70,6 +70,7 @@ class DAOProblema {
   static async getOne(id) {
     try {
       let problema = await Problema.findOne({
+        include: {model: Demandante},
         where: {id: id},
       });
       return problema;

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('../partials/header.ejs')%>
+</head>
+<body  >
+    <%-include('../partials/navbar.ejs')%>
+
+    <div class="conteudo">
+        
+        <!-- Menssagem do topo da página em jumbotron -->
+
+        <div class="jumbotron jumbotron-fluid">
+            <h1 class="display-4" >Lista dos Problemas</h1>
+            <p class="lead">Bem-vindo a lista de problemas.</p>
+        </div>
+
+        <div class="container" >
+
+            <!-- Conteúdo de cada card -->
+            <div class="lista-reboques">
+                <% problemas.forEach(function(problema){ %>
+                    <div class="card card-index" style="width: 40rem;">
+                        <a href="/problema/detalhe/<%=problema.id%>"></a>
+                        <div class="card-body">
+                          <h6 class="">Titulo: <%=problema.titulo.slice(0,30)%></h6>
+                          <h6 class="">Descrição: <%=problema.descricao.slice(0,40)%>...</h6>
+                          <h6 class="">Demandante: <%=problema.demandante.nome%></h6>
+                          <h6 class="">Data: <%=problema.dataSubmissao%></h6>
+                          <hr>
+                          <a href="/problema/detalhe/<%=problema.id%>" class="btn btn-primary">Detalhar</a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+
+        </div>
+
+    </div>
+    <%-include('../partials/footer.ejs')%>
+    
+</body>
+</html>

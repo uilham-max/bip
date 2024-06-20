@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('../partials/header.ejs')%>
+        <script src="/js/validaCPF.js"></script>
+        <script src="/js/consome_viacep.js"></script>
+        <script src="/js/validar_senha.js"></script>
+</head>
+
+<body>
+
+    <%-include('../partials/navbar.ejs')%>
+
+        <div class="conteudo">
+            <div class="jumbotron junbotron-fluid">
+                <h1 class="display-4">Registro de problema</h1>
+            </div>
+            <div class="container">
+                <!--  -->
+                <form action="/problema/novo" method="POST">
+                    <div class="lista-reboques">
+
+
+                        <!-- Dados pessoais -->
+                        <div class="card card-reserva" style="width: 40rem;">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="titulo">Título</label>
+                                    <input class="form-control" id="titulo" type="text" name="titulo" required>
+                                    <div class="valid-feedback">
+                                        <!-- Looks good! -->
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Preencha o campo.
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="descricao">Descrição</label>
+                                    <input class="form-control" id="descricao" type="text" name="descricao" required>
+                                    <div class="valid-feedback">
+                                        <!-- Looks good! -->
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Preencha o campo.
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            
+                            <br>
+                            <p style="margin: 0.5rem;">
+                                <input class="btn btn-primary" type="submit" value="Enviar">
+                            </p>
+
+                            <% if(mensagem){ %>
+                                <div class="alert alert-info">
+                                    <strong>Alerta!</strong>
+                                    <%= mensagem %>
+                                </div>
+                            <% } %>
+
+                        </div>
+                    </div>
+            </div>
+
+        </div>
+        </form>
+        <!--  -->
+        </div>
+        </div>
+
+        <%-include('../partials/footer.ejs')%>
+
+</body>
+
+</html>

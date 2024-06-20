@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('../partials/header.ejs')%>
+</head>
+<body  >
+    <%-include('../partials/navbar.ejs')%>
+
+    <div class="conteudo">
+        
+        <!-- Menssagem do topo da página em jumbotron -->
+
+        <div class="jumbotron jumbotron-fluid">
+            <h1 class="display-4" >Detalhes do problema</h1>
+            <p class="lead">Estudantes podem propor soluções para este problema.</p>
+        </div>
+
+        <div class="container" >
+
+            <!-- Conteúdo de cada card -->
+            <div class="lista-reboques">
+                    <div class="card card-index" style="width: 40rem;">
+                        <a href="/problema/detalhe/<%=problema.id%>"></a>
+                        <div class="card-body">
+                          <h6 class="">Titulo: <%=problema.titulo%></h6>
+                          <h6 class="">Descrição: <%=problema.descricao%></h6>
+                          <h6 class="">Demandante: <%=problema.demandante.nome%></h6>
+                          <h6 class="">E-mail: <%=problema.demandante.email%></h6>
+                          <h6 class="">Data: <%=problema.dataSubmissao%></h6>
+                          <hr>
+                          <a href="/problema/detalhe/<%=problema.id%>" class="btn btn-primary">Propor solução</a>
+                          <a href="/problema/detalhe/<%=problema.id%>" class="btn btn-outline-success">Ver propostas</a>
+                        </div>
+                    </div>
+            </div>
+
+            <% if(mensagem){ %>
+                <div class="alert alert-info">
+                    <strong>Alerta!</strong>
+                    <%= mensagem %>
+                </div>
+            <% } %>
+
+        </div>
+
+    </div>
+    <%-include('../partials/footer.ejs')%>
+    
+</body>
+</html>
