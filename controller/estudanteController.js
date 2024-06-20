@@ -11,15 +11,26 @@ const getListarEstudantes = async (req, res) => {
 }
 
 const getLogin = (req, res) => {
-  res.render('estudante/login', {msg: ''});
+  res.render('estudante/login', {mensagem: ''});
 };
+
+const postLogin = async (req, res) => {
+  let result = await DAOEstudante.login(req.body.email, req.body.senha);
+  if (result) {
+    //req.session.usuario = result;
+    req.session.tipoUsuario = 'Estudante';
+    res.redirect('/');
+  } else {
+    res.render('estudante/login', {msg: 'Usuário ou senha inválidos.'});
+  }
+};
+
 const getLogout = (req, res) => {
   req.session.destroy();
-  res.redirect('/'); // <-- redireciona para pagina inicial
+  res.redirect('/');
 };
 const getNovoEstudante = (req, res) => {
-  res.render('estudante/novo', {msg: ''});
-};
+
 
 const getEditarEstudante = async (req, res) => {
   let estudante = await DAOEstudante.getOne(req.session.estudante.id);
@@ -28,22 +39,48 @@ const getEditarEstudante = async (req, res) => {
 };
 
 const postNovoEstudante = async (req, res) => {
-  const {nome, email, senha, senha2, cpf, endereco, curso, semestre, matricula} = req.body;
+  const {
+    nome,
+    email,
+    senha,
+    senha2,
+    cpf,
+    curso,
+    semestre,
+    matricula,
+    cep,
+    logradouro,
+    complemento,
+    bairro,
+    localidade,
+    uf,
+    numeroDaCasa,
+  } = req.body;
   if (senha === senha2) {
     let result = await DAOEstudante.insert(
       nome,
       email,
       senha,
       cpf,
-      endereco,
       curso,
       semestre,
-      matricula
+      matricula,
+      cep,
+      logradouro,
+      complemento,
+      bairro,
+      localidade,
+      uf,
+      numeroDaCasa
     );
     if (result) {
-      res.render('estudante/login', {msg: 'Usuário criado com sucesso'});
+      //res.render('estudante/login', {msg: 'Usuário criado com sucesso'});
+      console.log('Estudante criado com sucesso');
+      res.redirect('/');
     } else {
-      res.render('estudante/novoEstudante', {msg: 'Não foi possivel criar o usuario'});
+      //res.render('estudante/novoEstudante', {msg: 'Não foi possivel criar o usuario'});
+      console.log('Falha ao criar o estudante');
+      res.redirect('/');
     }
   }
 };
@@ -72,10 +109,13 @@ const postEditarEstudante = async (req, res) => {
   }
 };
 module.exports = {
-  getNovoEstudante,
-  postNovoEstudante,
+
   getLogin,
-  postLogin,
   getLogout,
-  getListarEstudantes,
+  getNovoEstudante,
+  getEditarEstudante,
+  postEditarEstudante,
+  postNovoEstudante,
+  postLogin,
+};
 }

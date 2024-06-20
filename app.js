@@ -4,13 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var conexao = require('./database/conexao');
-var {Demandante, Problema, Estudante, Proposta, Projeto, Mentor, Etapa} = require('./model/index');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var demandanteRouter = require('./routes/demandanteRouter')
+var demandanteRouter = require('./routes/demandanteRouter');
+var estudanteRouter = require('./routes/estudanteRouter');
 const mentorRouter = require('./routes/mentorRouter');
-const session = require('express-session')
+const session = require('express-session');
 
 var app = express();
 
@@ -25,11 +25,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'udjs93ka0', resave: true, saveUninitialized: true}));
 
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/demandante', demandanteRouter);
-// app.use('/mentor', mentorRouter);
+app.use('/estudante', estudanteRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

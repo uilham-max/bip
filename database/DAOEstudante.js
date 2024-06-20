@@ -18,17 +18,38 @@ class DAOEstudante {
       return false;
     }
   }
-  static async insert(nome, email, senha, cpf, endereco, curso, semestre, matricula) {
+  static async insert(
+    nome,
+    email,
+    senha,
+    cpf,
+    curso,
+    semestre,
+    matricula,
+    cep,
+    logradouro,
+    complemento,
+    bairro,
+    localidade,
+    uf,
+    numero_da_casa
+  ) {
     try {
       return await Estudante.create({
         nome: nome,
         email: email,
         senha: bcrypt.hashSync(senha, 10),
         cpf: cpf,
-        endereco: endereco,
         curso: curso,
         semestre: semestre,
         matricula: matricula,
+        cep: cep,
+        logradouro: logradouro,
+        complemento: complemento,
+        bairro: bairro,
+        localidade: localidade,
+        uf: uf,
+        numero_da_casa: numero_da_casa,
       });
     } catch (error) {
       console.log(error.toString());
@@ -36,7 +57,23 @@ class DAOEstudante {
     }
   }
 
-  static async update(id, nome, email, senha, cpf, endereco, curso, semestre, matricula) {
+  static async update(
+    id,
+    nome,
+    email,
+    senha,
+    cpf,
+    curso,
+    semestre,
+    matricula,
+    cep,
+    logradouro,
+    complemento,
+    bairro,
+    localidade,
+    uf,
+    numero_da_casa
+  ) {
     try {
       await Estudante.update(
         {
@@ -44,10 +81,15 @@ class DAOEstudante {
           email: email,
           senha: bcrypt.hashSync(senha, 10),
           cpf: cpf,
-          endereco: endereco,
           curso: curso,
           semestre: semestre,
           matricula: matricula,
+          logradouro: logradouro,
+          complemento: complemento,
+          bairro: bairro,
+          localidade: localidade,
+          uf: uf,
+          numero_da_casa: numero_da_casa,
         },
         {where: {id: id}}
       );

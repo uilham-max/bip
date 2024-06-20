@@ -1,16 +1,16 @@
 
 // RETORNA SOMENTE AS INICIAS DO NOME
-function demandanteNome(req, res){
-    if(req.session.demandante && req.session.demandante.nome){
-        let a = req.session.demandante.nome
-        let b = req.session.demandante.sobrenome
+function usuarioNome(req, res){
+    if(req.session.usuario && req.session.usuario.nome){
+        let a = req.session.usuario.nome
+        let b = req.session.usuario.sobrenome
         // return a[0] + b[0]
-        return req.session.demandante
+        return req.session.usuario
     } else {
         return ""
     }
 }
 
 module.exports = {
-    demandanteNome,
+    usuarioNome,
 }

@@ -1,7 +1,26 @@
 const express = require('express')
 const DAODemandante = require('../database/DAODemandante')
 const bcrypt = require('bcrypt')
-const { demandanteNome } = require('../helpers/getSessionNome')
+const { usuarioNome } = require('../helpers/getSessionNome')
+
+
+const getEditar = async (req, res) => {
+    let id = req.params.id
+    console.log(req.params);
+    let demandante = await DAODemandante.getOne(id)
+    if(!demandante){
+        res.send('erro')
+        // res.render('erro', {mensagem: "Erro ao buscar demandante."})
+    }
+    res.send(demandante)
+    // res.render('demandante/editar/:id', {user: usuarioNome(req, res), mensagem: ""})
+
+}
+
+const postEditar = async (req, res) => {
+    
+}
+
 
 
 const getListarDemandantes = async (req, res) => {
@@ -14,7 +33,7 @@ const getListarDemandantes = async (req, res) => {
 }
 
 const getLogin = async (req, res) => {
-    res.render('demandante/login', {user: demandanteNome(req, res), mensagem: ""})
+    res.render('demandante/login', {user: usuarioNome(req, res), mensagem: ""})
 }
 
 const getLogout = async (req, res) => {
@@ -30,8 +49,8 @@ const postLogin = async (req, res) => {
             console.log(demandante.email, demandante.senha);
             if(bcrypt.compareSync(senha, demandante.senha)){
                 console.log('teste 1');
-                req.session.demandante = {id: demandante.id, nome: demandante.nome, email: demandante.email}
-                console.log(req.session.demandante.nome, "fez login...");
+                req.session.usuario = {id: demandante.id, nome: demandante.nome, email: demandante.email}
+                console.log(req.session.usuario.nome, "fez login...");
                 res.redirect('/')
             } else {
                 console.log('teste 2');
@@ -46,7 +65,7 @@ const postLogin = async (req, res) => {
 }
 
 const getNovoDemandante = async (req, res) => {
-    res.render('demandante/novo', {user: demandanteNome(req, res), mensagem:''})
+    res.render('demandante/novo', {user: usuarioNome(req, res), mensagem:''})
 }
 
 const postNovoDemandante = async (req, res) => {
@@ -170,7 +189,7 @@ const postNovoDemandante = async (req, res) => {
     if(!demandante){
         res.render('erro',{mensagem: "Erro ao inserir demante."})
     }
-    req.session.demandante = {id: demandante.id, nome: demandante.nome, sobrenome: demandante.sobrenome, email: demandante.email}
+    req.session.usuario = {id: demandante.id, nome: demandante.nome, sobrenome: demandante.sobrenome, email: demandante.email}
 
     console.log('Demandante inserido.');
     
@@ -186,5 +205,4 @@ module.exports = {
     getLogin,
     postLogin,
     getLogout,
-    getListarDemandantes,
 }
