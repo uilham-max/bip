@@ -1,13 +1,14 @@
 const {Problema, Demandante} = require('../model/index');
 
 class DAOProblema {
-  static async insert(descricao, dataSubmissao, titulo, demandanteId) {
+  static async insert(descricao, dataSubmissao, titulo, status, demandanteId) {
     try {
       let problema = await Problema.create({
         descricao: descricao,
         dataSubmissao: dataSubmissao,
         titulo: titulo,
         demandanteId: demandanteId,
+        status: status,
       });
       return problema;
     } catch (error) {
@@ -16,7 +17,7 @@ class DAOProblema {
     }
   }
 
-  static async update(id, descricao, dataSubmissao, titulo, demandanteId) {
+  static async update(id, descricao, dataSubmissao, titulo, status, demandanteId) {
     try {
       let problema = await Problema.update(
         {
@@ -24,6 +25,7 @@ class DAOProblema {
           dataSubmissao: dataSubmissao,
           titulo: titulo,
           demandanteId: demandanteId,
+          status: status,
         },
         {where: {id: id}}
       );
@@ -60,7 +62,7 @@ class DAOProblema {
         order: ['titulo'],
         where: {demandanteId: id},
       });
-      return receitas;
+      return problemas;
     } catch (error) {
       console.log(error.toString());
       return undefined;

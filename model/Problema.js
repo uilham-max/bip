@@ -7,6 +7,7 @@ const Problema = conexao.define('problema', {
   descricao: Sequelize.STRING,
   dataSubmissao: Sequelize.DATEONLY,
   titulo: Sequelize.STRING,
+  status: Sequelize.STRING,
   demandanteId: {
     type: Sequelize.INTEGER,
     references: {
