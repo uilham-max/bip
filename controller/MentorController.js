@@ -1,4 +1,4 @@
-
+const DAOMentor = require('../database/DAOMentor');
 
 
 exports.RenderHomePageMentor = ((req, res) =>{
@@ -21,6 +21,8 @@ exports.CadastrarBancoNovoMentor = ((req, res) =>{
     res.send('200');
 });
 
-exports.ListarTodosMentor = ((req, res) =>{
-    res.send('200');
+exports.ListarTodosMentor = async ((req, res) =>{
+    Mentores = DAOMentor.getAll();
+
+    res.send(Mentores)
 });
