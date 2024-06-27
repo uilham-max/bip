@@ -45,7 +45,7 @@ const postNovo = async (req, res) => {
   let demandanteId = req.session.usuario.id;
   let dataSubmissao = moment.tz(new Date(), 'America/Sao_Paulo').format('YYYY-MM-DD');
 
-  let insert = await DAOProblema.insert(descricao, dataSubmissao, titulo, demandanteId);
+  let insert = await DAOProblema.insert(descricao, dataSubmissao, titulo, "PENDENTE", demandanteId);
   if (!insert) {
     res.render('problema/novo', {
       user: usuarioNome(req, res),

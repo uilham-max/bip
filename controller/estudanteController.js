@@ -1,4 +1,5 @@
 const {DAOEstudante} = require('../database/DAOEstudante');
+const { usuarioNome } = require('../helpers/getSessionNome');
 
 
 const getListarEstudantes = async (req, res) => {
@@ -30,6 +31,8 @@ const getLogout = (req, res) => {
   res.redirect('/');
 };
 const getNovoEstudante = (req, res) => {
+  res.render('estudante/novo', {user: usuarioNome(req, res), mensagem:""})
+}
 
 
 const getEditarEstudante = async (req, res) => {
@@ -75,13 +78,11 @@ const postNovoEstudante = async (req, res) => {
     );
 
     if (result) {
-      //res.render('estudante/login', {msg: 'Usuário criado com sucesso'});
+      res.render('estudante/login', {msg: 'Usuário criado com sucesso'});
       console.log('Estudante criado com sucesso');
-      res.redirect('/');
     } else {
-      //res.render('estudante/novoEstudante', {msg: 'Não foi possivel criar o usuario'});
-      console.log('Falha ao criar o estudante');
-      res.redirect('/');
+      res.render('estudante/novo', {user: usuarioNome(req, res) ,mensagem: 'Não foi possivel criar o usuario'});
+      // console.log('Falha ao criar o estudante');
     }
   }
 };
@@ -119,4 +120,4 @@ module.exports = {
   postNovoEstudante,
   postLogin,
 };
-}
+
