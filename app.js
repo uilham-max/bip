@@ -11,6 +11,7 @@ var demandanteRouter = require('./routes/demandanteRouter');
 var problemaRouter = require('./routes/problemaRouter');
 var estudanteRouter = require('./routes/estudanteRouter');
 var mentorRouter = require('./routes/mentorRouter');
+var propostaRouter = require('./routes/propostaRouter');
 
 const session = require('express-session');
 
