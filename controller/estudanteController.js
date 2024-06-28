@@ -1,4 +1,4 @@
-const {DAOEstudante} = require('../database/DAOEstudante');
+const DAOEstudante = require('../database/DAOEstudante');
 const {usuarioNome} = require('../helpers/getSessionNome');
 
 const getListarEstudantes = async (req, res) => {
@@ -44,12 +44,14 @@ const getEditarEstudante = async (req, res) => {
 };
 
 const postNovoEstudante = async (req, res) => {
-  const {nome, email, senha, senha2, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa} = req.body;
-  if (senha === senha2) {
+  const {nome, email, senha, repeteSenha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa} = req.body;
+  console.log(senha, repeteSenha)
+  if (senha === repeteSenha) {
+    console.log('dfdfdf')
     let result = await DAOEstudante.insert(nome, email, senha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa);
-
+    console.log(result)
     if (result) {
-      res.render('estudante/login', {msg: 'Usuário criado com sucesso'});
+      res.render('estudante/login', {mensagem: 'Usuário criado com sucesso'});
       console.log('Estudante criado com sucesso');
     } else {
       res.render('estudante/novo', {

@@ -1,4 +1,4 @@
-const {Estudante} = require('../model/index');
+  const {Estudante} = require('../model/index');
 const bcrypt = require('bcrypt');
 
 class DAOEstudante {
@@ -18,6 +18,7 @@ class DAOEstudante {
   }
   static async insert(nome, email, senha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numero_da_casa) {
     try {
+      console.log('aquii')
       let estudante = await Estudante.create({nome: nome, email: email, senha: bcrypt.hashSync(senha, 10), cpf: cpf, curso: curso, semestre: semestre, matricula: matricula, cep: cep, logradouro: logradouro, complemento: complemento, bairro: bairro, localidade: localidade, uf: uf, numero_da_casa: numero_da_casa});
       console.log(estudante);
       return estudante;
