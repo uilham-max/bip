@@ -24,9 +24,9 @@ class DAOMentor {
         }
     }
 
-    static async getOne(id) {
+    static async getOne(data) {
         try {
-            const mentor = await Mentor.findByPk(id);
+            const mentor = await Mentor.findOne(data);
             if (!mentor) {
                 throw new Error('Mentor not found');
             }
