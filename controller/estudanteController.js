@@ -1,28 +1,31 @@
 const {DAOEstudante} = require('../database/DAOEstudante');
-const { usuarioNome } = require('../helpers/getSessionNome');
-
+const {usuarioNome} = require('../helpers/getSessionNome');
 
 const getListarEstudantes = async (req, res) => {
-  let demandantes = await DAODemandante.getAll()
-  if(!demandantes){
-      console.log("erro.");
+  let demandantes = await DAODemandante.getAll();
+  if (!demandantes) {
+    console.log('erro.');
   }
   // console.log(demandantes);
-  res.send(demandantes)
-}
+  res.send(demandantes);
+};
 
 const getLogin = (req, res) => {
   res.render('estudante/login', {mensagem: ''});
 };
 
 const postLogin = async (req, res) => {
-  let result = await DAOEstudante.login(req.body.email, req.body.senha);
-  if (result) {
-    //req.session.usuario = result;
-    req.session.tipoUsuario = 'Estudante';
+  const estudante = await DAOEstudante.login(req.body.email, req.body.senha);
+  if (estudante) {
+    req.session.usuario = {
+      id: estudante.id,
+      nome: estudante.nome,
+      email: estudante.email,
+      tipo: 'estudante',
+    };
     res.redirect('/');
   } else {
-    res.render('estudante/login', {msg: 'Usuário ou senha inválidos.'});
+    res.render('estudante/login', {mensagem: 'Usuário ou senha inválidos.'});
   }
 };
 
@@ -31,9 +34,8 @@ const getLogout = (req, res) => {
   res.redirect('/');
 };
 const getNovoEstudante = (req, res) => {
-  res.render('estudante/novo', {user: usuarioNome(req, res), mensagem:""})
-}
-
+  res.render('estudante/novo', {user: usuarioNome(req, res), mensagem: ''});
+};
 
 const getEditarEstudante = async (req, res) => {
   let estudante = await DAOEstudante.getOne(req.session.estudante.id);
@@ -42,76 +44,37 @@ const getEditarEstudante = async (req, res) => {
 };
 
 const postNovoEstudante = async (req, res) => {
-  const {
-    nome,
-    email,
-    senha,
-    senha2,
-    cpf,
-    curso,
-    semestre,
-    matricula,
-    cep,
-    logradouro,
-    complemento,
-    bairro,
-    localidade,
-    uf,
-    numeroDaCasa,
-  } = req.body;
+  const {nome, email, senha, senha2, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa} = req.body;
   if (senha === senha2) {
-    let result = await DAOEstudante.insert(
-      nome,
-      email,
-      senha,
-      cpf,
-      curso,
-      semestre,
-      matricula,
-      cep,
-      logradouro,
-      complemento,
-      bairro,
-      localidade,
-      uf,
-      numeroDaCasa
-    );
+    let result = await DAOEstudante.insert(nome, email, senha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa);
 
     if (result) {
       res.render('estudante/login', {msg: 'Usuário criado com sucesso'});
       console.log('Estudante criado com sucesso');
     } else {
-      res.render('estudante/novo', {user: usuarioNome(req, res) ,mensagem: 'Não foi possivel criar o usuario'});
+      res.render('estudante/novo', {
+        user: usuarioNome(req, res),
+        mensagem: 'Não foi possivel criar o usuario',
+      });
       // console.log('Falha ao criar o estudante');
     }
   }
 };
 
 const postEditarEstudante = async (req, res) => {
-  const {nome, email, senha, cpf, endereco, curso, semestre, matricula} = req.body;
-  let result = await DAOEstudante.update(
-    req.session.estudante.id,
-    nome,
-    email,
-    senha,
-    cpf,
-    endereco,
-    curso,
-    semestre,
-    matricula
-  );
+  const {nome, email, senha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa} = req.body;
+  let result = await DAOEstudante.update(req.session.estudante.id, nome, email, senha, cpf, curso, semestre, matricula, nome, email, senha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa);
   if (result) {
     let estudante = await DAOEstudante.getOne(req.session.estudante.id);
-    res.render('estudante/editarEstudante', {
+    res.render('estudante/editar', {
       estudante: estudante,
-      msg: 'Usuário editado com sucesso',
+      mensagem: 'Usuário editado com sucesso',
     });
   } else {
-    res.render('error', {msg: 'Falha ao editar usuário'});
+    res.render('error', {mensagem: 'Falha ao editar usuário'});
   }
 };
 module.exports = {
-
   getLogin,
   getLogout,
   getNovoEstudante,
@@ -120,4 +83,3 @@ module.exports = {
   postNovoEstudante,
   postLogin,
 };
-

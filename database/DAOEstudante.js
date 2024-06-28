@@ -1,6 +1,4 @@
 const {Estudante} = require('../model/index');
-const {conexao} = require('./conexao');
-const {QueryTypes} = require('sequelize');
 const bcrypt = require('bcrypt');
 
 class DAOEstudante {
@@ -18,39 +16,9 @@ class DAOEstudante {
       return false;
     }
   }
-  static async insert(
-    nome,
-    email,
-    senha,
-    cpf,
-    curso,
-    semestre,
-    matricula,
-    cep,
-    logradouro,
-    complemento,
-    bairro,
-    localidade,
-    uf,
-    numero_da_casa
-  ) {
+  static async insert(nome, email, senha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numero_da_casa) {
     try {
-      let estudante = await Estudante.create({
-        nome: nome,
-        email: email,
-        senha: bcrypt.hashSync(senha, 10),
-        cpf: cpf,
-        curso: curso,
-        semestre: semestre,
-        matricula: matricula,
-        cep: cep,
-        logradouro: logradouro,
-        complemento: complemento,
-        bairro: bairro,
-        localidade: localidade,
-        uf: uf,
-        numero_da_casa: numero_da_casa,
-      });
+      let estudante = await Estudante.create({nome: nome, email: email, senha: bcrypt.hashSync(senha, 10), cpf: cpf, curso: curso, semestre: semestre, matricula: matricula, cep: cep, logradouro: logradouro, complemento: complemento, bairro: bairro, localidade: localidade, uf: uf, numero_da_casa: numero_da_casa});
       console.log(estudante);
       return estudante;
     } catch (error) {
@@ -59,42 +27,9 @@ class DAOEstudante {
     }
   }
 
-  static async update(
-    id,
-    nome,
-    email,
-    senha,
-    cpf,
-    curso,
-    semestre,
-    matricula,
-    cep,
-    logradouro,
-    complemento,
-    bairro,
-    localidade,
-    uf,
-    numero_da_casa
-  ) {
+  static async update(id, nome, email, senha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numero_da_casa) {
     try {
-      await Estudante.update(
-        {
-          nome: nome,
-          email: email,
-          senha: bcrypt.hashSync(senha, 10),
-          cpf: cpf,
-          curso: curso,
-          semestre: semestre,
-          matricula: matricula,
-          logradouro: logradouro,
-          complemento: complemento,
-          bairro: bairro,
-          localidade: localidade,
-          uf: uf,
-          numero_da_casa: numero_da_casa,
-        },
-        {where: {id: id}}
-      );
+      await Estudante.update({nome: nome, email: email, senha: bcrypt.hashSync(senha, 10), cpf: cpf, curso: curso, semestre: semestre, matricula: matricula, logradouro: logradouro, complemento: complemento, bairro: bairro, localidade: localidade, uf: uf, numero_da_casa: numero_da_casa}, {where: {id: id}});
       return true;
     } catch (error) {
       console.log(error.toString());
