@@ -39,17 +39,17 @@ const getNovoEstudante = (req, res) => {
 
 const getEditarEstudante = async (req, res) => {
   let estudante = await DAOEstudante.getOne(req.session.estudante.id);
-  if (estudante) res.render('estudante/editarEstudante', {estudante: estudante, msg: ''});
-  else res.render('error', {msg: 'Erro na tentativa de edição do Usuário.'});
+  if (estudante) res.render('estudante/editar', {estudante: estudante, mensagem: ''});
+  else res.render('error', {mensagem: 'Erro na tentativa de edição do Usuário.'});
 };
 
 const postNovoEstudante = async (req, res) => {
   const {nome, email, senha, repeteSenha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa} = req.body;
-  console.log(senha, repeteSenha)
+  console.log(senha, repeteSenha);
   if (senha === repeteSenha) {
-    console.log('dfdfdf')
+    console.log('dfdfdf');
     let result = await DAOEstudante.insert(nome, email, senha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa);
-    console.log(result)
+    console.log(result);
     if (result) {
       res.render('estudante/login', {mensagem: 'Usuário criado com sucesso'});
       console.log('Estudante criado com sucesso');
