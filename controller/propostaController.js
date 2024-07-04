@@ -23,4 +23,4 @@ const postNovo = async (req, res) => {
   });
 };
 
-module.exports(getNovo, postNovo);
+module.exports = {getNovo, postNovo};
