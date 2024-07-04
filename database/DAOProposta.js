@@ -2,6 +2,7 @@ const {Problema, Proposta, Estudante} = require('../model/index');
 
 class DAOProposta {
   static async insert(titulo, descricao, dataSubmissao, areaConhecimento, problemaId, estudanteId) {
+    console.log("Inserindo Proposta: \n", titulo, descricao, dataSubmissao, areaConhecimento, problemaId, estudanteId);
     try {
       let proposta = await Proposta.create({
         titulo: titulo,
@@ -73,16 +74,17 @@ class DAOProposta {
 
   static async getOne(id) {
     try {
-      let proposta = await Proposta.findOne({
-        include: {model: Estudante, model: Problema},
-        where: {id: id},
+      let proposta = await Proposta.findByPk(id,{
+        include: {model: Estudante}
       });
+      // console.log("getOne --> \n",proposta);
       return proposta;
     } catch (error) {
       console.log(error.toString());
       return undefined;
     }
   }
+
 }
 
 module.exports = DAOProposta;

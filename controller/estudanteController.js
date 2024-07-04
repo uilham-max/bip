@@ -23,6 +23,7 @@ const postLogin = async (req, res) => {
       email: estudante.email,
       tipo: 'estudante',
     };
+    console.log("Novo usuário na session:\n",req.session.usuario);
     res.redirect('/');
   } else {
     res.render('estudante/login', {mensagem: 'Usuário ou senha inválidos.'});

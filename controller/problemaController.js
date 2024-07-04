@@ -6,6 +6,7 @@ const moment = require('moment-timezone');
 const getDetalhe = async (req, res) => {
   let problemaId = req.params.problemaId;
   let problema = await DAOProblema.getOne(problemaId);
+  // console.log(problema);
   if (!problema) {
     res.render('problema/detalhe', {
       user: usuarioNome(req, res),

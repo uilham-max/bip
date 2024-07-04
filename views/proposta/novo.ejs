@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('../partials/header.ejs')%>
+</head>
+
+<body>
+
+    <%-include('../partials/navbar.ejs')%>
+
+        <div class="conteudo">
+            <div class="jumbotron junbotron-fluid">
+                <h1 class="display-4">Registar Proposta</h1>
+            </div>
+            <div class="container">
+                <!--  -->
+                <form action="/proposta/novo" method="POST">
+                    <div class="lista-reboques">
+
+
+                        <!-- Dados pessoais -->
+                        <div class="card card-reserva" style="width: 40rem;">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="titulo">Título</label>
+                                    <input class="form-control" id="titulo" type="text" name="titulo" required>
+                                    <div class="valid-feedback">
+                                        <!-- Looks good! -->
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Preencha o campo.
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="areaConhecimento">Área do Conhecimento</label>
+                                    <input class="form-control" id="areaConhecimento" type="text" name="areaConhecimento" required>
+                                    <div class="valid-feedback">
+                                        <!-- Looks good! -->
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Preencha o campo.
+                                    </div>
+                                </div>
+
+                                <div class="form-floating mt-3">
+                                    <textarea class="form-control" placeholder="Descreva sua proposta aqui" id="floatingTextarea2" name="descricao" style="height: 100px"></textarea>
+                                    <label for="floatingTextarea2">Descrição da proposta</label>
+                                    <div class="valid-feedback">
+                                        <!-- Looks good! -->
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Preencha o campo.
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <input type="hidden" id="problemaId" name="problemaId" value="<%=problemaId%>">
+                            <br>
+                            <p style="margin: 0.5rem;">
+                                <input class="btn btn-primary" type="submit" value="Enviar">
+                            </p>
+
+                            <% if(mensagem){ %>
+                                <div class="alert alert-info">
+                                    <strong>Alerta!</strong>
+                                    <%= mensagem %>
+                                </div>
+                            <% } %>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        
+        <!--  -->
+        </div>
+        </div>
+
+        <%-include('../partials/footer.ejs')%>
+
+</body>
+
+</html>

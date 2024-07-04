@@ -34,6 +34,7 @@ app.use('/demandante', demandanteRouter);
 app.use('/problema', problemaRouter);
 app.use('/estudante', estudanteRouter);
 app.use('/mentor', mentorRouter);
+app.use('/proposta', propostaRouter)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

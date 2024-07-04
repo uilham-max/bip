@@ -1,4 +1,4 @@
-const {Problema, Demandante} = require('../model/index');
+const {Problema, Demandante, Proposta} = require('../model/index');
 
 class DAOProblema {
   static async insert(descricao, dataSubmissao, titulo, status, demandanteId) {
@@ -72,7 +72,7 @@ class DAOProblema {
   static async getOne(id) {
     try {
       let problema = await Problema.findOne({
-        include: {model: Demandante},
+        include: [{model: Demandante}, {model: Proposta}],
         where: {id: id},
       });
       return problema;
