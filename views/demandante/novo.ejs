@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <%-include('../partials/header.ejs')%>
-    <script src="/js/validaCPF.js" ></script>
-    <script src="/js/consome_viacep.js" ></script>
-    <script src="/js/validar_senha.js" ></script>
+    <!--<script src="/js/validaCPF.js" ></script>-->
+    <script src="/js/consome_viacep.js"></script>
+    <script src="/js/validaDadosFormularioCadastro.js" ></script>
+    <!--<script src="/js/validar_senha.js" ></script>-->
 </head>
 <body  >
     
@@ -33,7 +34,7 @@
                                     <!-- Looks good! -->
                                 </div>
                                 <div class="invalid-feedback">
-                                    Preencha o campo.
+                                    <span id="invalidNome"></span>
                                 </div>
                             </div>
 
@@ -45,7 +46,7 @@
                                     <!-- Looks good! -->
                                 </div>
                                 <div class="invalid-feedback">
-                                    Preencha o campo.
+                                    <span id="invalidCPF"></span>
                                 </div>
                             </div>
 
@@ -66,7 +67,7 @@
                                     <!-- Looks good! -->
                                 </div>
                                 <div class="invalid-feedback">
-                                    Preencha o campo.
+                                    <span id="invalidCep">
                                 </div>
                             </div>
 
@@ -79,7 +80,7 @@
                                         <!-- Looks good! -->
                                     </div>
                                     <div class="invalid-feedback">
-                                        Preencha o campo.
+                                        <span id="invalidLogradouro"></span>
                                     </div>
                                 </div>
     
@@ -90,7 +91,7 @@
                                         <!-- Looks good! -->
                                     </div>
                                     <div class="invalid-feedback">
-                                        Preencha o campo.
+                                        <span id="invalidNumeroDaCasa"></span>
                                     </div>
                                 </div>
                                 
@@ -108,7 +109,7 @@
                                     <!-- Looks good! -->
                                 </div>
                                 <div class="invalid-feedback">
-                                    Preencha o campo.
+                                    <span id="invalidBairro"></span>
                                 </div>
                             </div>
 
@@ -120,7 +121,7 @@
                                         <!-- Looks good! -->
                                     </div>
                                     <div class="invalid-feedback">
-                                        Preencha o campo.
+                                        <span id="invalidLocalidade"></span>
                                     </div>
                                 </div>
     
@@ -152,7 +153,7 @@
                                     <!-- Looks good! -->
                                 </div>
                                 <div class="invalid-feedback">
-                                    Preencha o campo.
+                                    <span id="invalidEmail"></span>
                                 </div>
                             </div>
 
@@ -164,7 +165,7 @@
                                     <!-- Looks good! -->
                                 </div>
                                 <div class="invalid-feedback">
-                                    Preencha o campo.
+                                    <span id="invalidSenha"></span>
                                 </div>
                             </div>
                             
@@ -175,7 +176,7 @@
                                     <!-- Looks good! -->
                                 </div>
                                 <div class="invalid-feedback">
-                                    Preencha o campo.
+                                    <span id="invalidrepeteSenha"></span>
                                 </div>
                             </div>
 

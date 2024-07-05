@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     inputNumeroDaCasa = document.getElementById('numeroDaCasa')
     inputComplemento = document.getElementById('complemento')
     inputLocalidade = document.getElementById('localidade')
-    inputMatricula = document.getElementById('matricula')
 
     invalidNome = document.getElementById('invalidNome');
     invalidCPF = document.getElementById('invalidCPF')
@@ -22,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     invalidNumeroDaCasa = document.getElementById('invalidNumeroDaCasa')
     invalidComplemento = document.getElementById('invalidComplemento')
     invalidLocalidade = document.getElementById('invalidLocalidade')
-    invalidMatricula = document.getElementById('invalidMatricula')
+
 
 
 
@@ -59,23 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         inputCep.value = formattedValue
     })
 
-    //FORMATA MATRICULA
-    inputMatricula.addEventListener('input', () => {
-        // Obtém o valor atual do campo de input
-        let value = inputMatricula.value.replace(/\./g, ''); // Remove pontos existentes
-        let formattedValue = '';
-    
-        // Verifica o comprimento do valor e formata adequadamente
-        if (value.length <= 7) {
-            formattedValue = value;
-        } else {
-            formattedValue = `${value.substring(0, 7)}.${value.substring(7)}`;
-        }
-    
-        // Atualiza o valor do campo de input com o valor formatado
-        inputMatricula.value = formattedValue;
-    });
-
 
     // VALIDA NOME
     inputNome.addEventListener('blur', () => {
@@ -89,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             inputNome.setCustomValidity('')
             inputNome.classList.remove('is-invalid')
-            //invalidNome.textContent = ''
+            invalidNome.textContent = ''
         }
 
         // Menos de 2 ou mais de 100 caracteres
@@ -116,13 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
             inputCPF.setCustomValidity('mensagem')
             inputCPF.classList.add('is-invalid')
             invalidCPF.textContent = 'Deve ter 11 dígitos.'
-            console.log("CPF")
             return;
         } else {
             inputCPF.setCustomValidity('')
             inputCPF.classList.remove('is-invalid')
             invalidCPF.textContent = ''
-            console.log(cpf)
         }
 
         // Verifica se todos os dígitos são iguais

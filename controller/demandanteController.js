@@ -70,9 +70,11 @@ const getNovoDemandante = async (req, res) => {
 
 const postNovoDemandante = async (req, res) => {
     let {nome, email, senha, repeteSenha, cpf, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa, tipoUsuario} = req.body
+    // cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
 
-    console.log(req.body);
+    // console.log(req.body);
 
+    // console.log(cpf);
     // Não permite numeros ou caracteres especiais no nome
     if(!(/^[a-zA-ZÀ-ÿ\s]+$/.test(nome))){
         res.render('erro', {mensagem: "erro no nome"})
@@ -96,14 +98,15 @@ const postNovoDemandante = async (req, res) => {
     }
 
 
-    cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+    cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
       
+    console.log('cpf replaceado',cpf)
     // O CPF deve ter 11 dígitos numéricos
     if (cpf.length !== 11 || !/^\d{11}$/.test(cpf)) {
-    res.render('erro',{
-        mensagem: "Erro. CPF Deve ter 11 dígitos."
-    })
-    return;
+        res.render('erro',{
+            mensagem: "Erro. CPF Deve ter 11 dígitos."
+        })
+        return;
     } 
 
     // Verifica se todos os dígitos são iguais
@@ -146,7 +149,7 @@ const postNovoDemandante = async (req, res) => {
 
 
     // CEP
-    cep.replace(/\D/g, '')
+    cep = cep.replace(/\D/g, '')
     if(cep.length !== 8){
         res.render('erro',{
             mensagem: "Erro. CEP Deve ter 8 dígitos numéricos."
