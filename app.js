@@ -12,6 +12,7 @@ var problemaRouter = require('./routes/problemaRouter');
 var estudanteRouter = require('./routes/estudanteRouter');
 var mentorRouter = require('./routes/mentorRouter');
 var propostaRouter = require('./routes/propostaRouter');
+var projetoRouter = require('./routes/projetoRouter');
 
 const session = require('express-session');
 
@@ -34,7 +35,9 @@ app.use('/demandante', demandanteRouter);
 app.use('/problema', problemaRouter);
 app.use('/estudante', estudanteRouter);
 app.use('/mentor', mentorRouter);
-app.use('/proposta', propostaRouter)
+app.use('/proposta', propostaRouter);
+app.use('/projeto', projetoRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
