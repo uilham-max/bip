@@ -16,7 +16,7 @@
 
       <div class="container" style="width: 40rem">
         <!-- Conteúdo de cada card -->
-        <div class="lista-reboques" >
+        <div class="lista-reboques">
           <div class="card card-index" style="width: 40rem">
             <a href="/problema/detalhe/<%=problema.id%>"></a>
             <div class="card-body">
@@ -31,20 +31,18 @@
             </div>
           </div>
           <h3 class="display-4">Propostas para este problema</h3>
-          
+
           <% problema.proposta.forEach(function(proposta) { %>
-            <div class="card card-index">
-              
-              <div class="card-body">
-                <h6 class="" >Titulo: <%=proposta.titulo%></h6>
-                <h6 class="" >Descrição: <%=proposta.descricao%></h6>
-                <h6 class="" >Data: <%=proposta.dataSubmissao%></h6>
-                <a href="/proposta/detalhe/<%=proposta.id%>" class="btn btn-primary">Detalhar</a>
-              </div>
-
+          <div class="card card-index">
+            <div class="card-body">
+              <h6 class="">Estudante: <%=proposta.estudante.nome%></h6>
+              <h6 class="">Titulo: <%=proposta.titulo%></h6>
+              <h6 class="">Descrição: <%=proposta.descricao%></h6>
+              <h6 class="">Data: <%=proposta.dataSubmissao%></h6>
+              <a href="/proposta/detalhe/<%=proposta.id%>" class="btn btn-primary">Detalhar</a>
             </div>
+          </div>
           <% }) %>
-
         </div>
 
         <% if(mensagem){ %>

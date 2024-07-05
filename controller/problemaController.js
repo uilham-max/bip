@@ -6,7 +6,7 @@ const moment = require('moment-timezone');
 const getDetalhe = async (req, res) => {
   let problemaId = req.params.problemaId;
   let problema = await DAOProblema.getOne(problemaId);
-  // console.log(problema);
+  console.log('Estudante:', problema.proposta);
   if (!problema) {
     res.render('problema/detalhe', {
       user: usuarioNome(req, res),
@@ -46,7 +46,7 @@ const postNovo = async (req, res) => {
   let demandanteId = req.session.usuario.id;
   let dataSubmissao = moment.tz(new Date(), 'America/Sao_Paulo').format('YYYY-MM-DD');
 
-  let insert = await DAOProblema.insert(descricao, dataSubmissao, titulo, "PENDENTE", demandanteId);
+  let insert = await DAOProblema.insert(descricao, dataSubmissao, titulo, 'PENDENTE', demandanteId);
   if (!insert) {
     res.render('problema/novo', {
       user: usuarioNome(req, res),
@@ -64,14 +64,7 @@ const getDesativar = async (req, res) => {
   let problema = await DAOProblema.getOne(problemaId);
 
   if (problema) {
-    let result = await DAOProblema.update(
-      problemaId,
-      problema.descricao,
-      problema.dataSubmissao,
-      problema.titulo,
-      'desativado',
-      problema.demandanteId
-    );
+    let result = await DAOProblema.update(problemaId, problema.descricao, problema.dataSubmissao, problema.titulo, 'desativado', problema.demandanteId);
     if (!result) return false;
     res.redirect('/problema/lista');
   }

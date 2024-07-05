@@ -24,7 +24,7 @@ Estudante.hasMany(Proposta, {
   onDelete: 'RESTRICT',
   onUpdate: 'CASCADE',
 });
-Proposta.hasMany(Estudante);
+Proposta.belongsTo(Estudante);
 
 Projeto.hasOne(Proposta);
 Proposta.belongsTo(Projeto);
