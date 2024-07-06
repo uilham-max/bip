@@ -4,6 +4,27 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var conexao = require('./database/conexao');
+const client = require('./database/connectionRedis.js')
+
+// const redis = require('redis')
+
+// // Cria um cliente Redis
+// const client = redis.createClient({ url: "redis://default:axWgF0AYiM9qCUq0xnyIWL8WnOeoLuwu@redis-10472.c82.us-east-1-2.ec2.redns.redis-cloud.com:10472"});
+
+// (async () => {
+//   await client.connect();
+// })();
+
+// // Evento de erro para capturar e tratar erros de conexão
+// client.on('error', (err) => {
+//   console.log('Erro ao conectar ao Redis:', err);
+// });
+
+// // Conecta ao Redis e executa uma função quando a conexão estiver pronta
+// client.on('connect', () => {
+//   console.log('Conectado ao Redis!');
+// });
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -55,5 +76,6 @@ app.use(function (err, req, res, next) {
 });
 
 conexao.authenticate();
+client.connect();
 
 module.exports = app;

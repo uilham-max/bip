@@ -2,6 +2,8 @@ const express = require('express');
 const DAOProblema = require('../database/DAOProblema');
 const {usuarioNome} = require('../helpers/getSessionNome');
 const moment = require('moment-timezone');
+const redisClient = require('../database/connectionRedis');
+const util = require('util')
 
 const getDetalhe = async (req, res) => {
   let problemaId = req.params.problemaId;
@@ -18,24 +20,63 @@ const getDetalhe = async (req, res) => {
 };
 
 const getLista = async (req, res) => {
-  let problemas = await DAOProblema.getAll();
+  console.log('Listando Problemas...');
 
-  if (problemas == '') {
+  const cacheKey = 'problemas_lista';
+  // await redisClient.del(cacheKey)
+  
+  try {
+
+    // Tenta obter a lista de problemas do cache Redis
+    console.log('Verificando cache no Redis...');
+    let cacheData = await redisClient.get(cacheKey); // Certifique-se que a função `get` foi promisificada corretamente
+
+    if (cacheData) {
+      // Se os dados estão no cache, parseia e envia como resposta
+      const problemas = JSON.parse(cacheData);
+      console.log('Pegando do Redis os dados cacheados!');
+      return res.render('problema/lista', {
+        user: usuarioNome(req, res),
+        problemas: problemas,
+        mensagem: ''
+      });
+    }
+
+    console.log('Dados não encontrados no cache, buscando no PostgreSQL...');
+
+    // Se não estão no cache, busca do banco de dados
+    let problemas = await DAOProblema.getAll();
+
+    if (!problemas || problemas.length === 0) {
+      const mensagem = !problemas ? 'Erro ao buscar a lista de problemas.' : 'Lista vazia.';
+      return res.render('problema/lista', {
+        user: usuarioNome(req, res),
+        problemas: [],
+        mensagem: mensagem
+      });
+    }
+
+    // Armazena os dados no Redis com expiração (exemplo: 10 segundos)
+    redisClient.set(cacheKey, JSON.stringify(problemas), {EX: 10});
+    console.log('Cacheando os dados do PostgreSQL no Redis!');
+
+    // Envia os dados como resposta
     res.render('problema/lista', {
       user: usuarioNome(req, res),
       problemas: problemas,
-      mensagem: 'Lista vazia.',
+      mensagem: ''
     });
-  }
-  if (!problemas) {
+
+  } catch (err) {
+    console.error('Erro:', err);
     res.render('problema/lista', {
       user: usuarioNome(req, res),
-      problemas: problemas,
-      mensagem: 'Erro ao buscar a lista de problemas.',
+      problemas: [],
+      mensagem: 'Erro ao buscar a lista de problemas.'
     });
   }
-  res.render('problema/lista', {user: usuarioNome(req, res), problemas: problemas, mensagem: ''});
 };
+
 
 const getNovo = async (req, res) => {
   res.render('problema/novo', {user: usuarioNome(req, res), mensagem: ''});
