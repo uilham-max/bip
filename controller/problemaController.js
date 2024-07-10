@@ -28,13 +28,13 @@ const getLista = async (req, res) => {
   try {
 
     // Tenta obter a lista de problemas do cache Redis
-    console.log('Verificando cache no Redis...');
-    let cacheData = await redisClient.get(cacheKey); // Certifique-se que a função `get` foi promisificada corretamente
+    // console.log('Verificando cache no Redis...');
+    let cacheData = await redisClient.get(cacheKey); 
 
     if (cacheData) {
       // Se os dados estão no cache, parseia e envia como resposta
       const problemas = JSON.parse(cacheData);
-      console.log('Pegando do Redis os dados cacheados!');
+      // console.log('Pegando do Redis os dados cacheados!');
       return res.render('problema/lista', {
         user: usuarioNome(req, res),
         problemas: problemas,
@@ -42,7 +42,7 @@ const getLista = async (req, res) => {
       });
     }
 
-    console.log('Dados não encontrados no cache, buscando no PostgreSQL...');
+    // console.log('Dados não encontrados no cache, buscando no PostgreSQL...');
 
     // Se não estão no cache, busca do banco de dados
     let problemas = await DAOProblema.getAll();
@@ -58,7 +58,7 @@ const getLista = async (req, res) => {
 
     // Armazena os dados no Redis com expiração (exemplo: 10 segundos)
     redisClient.set(cacheKey, JSON.stringify(problemas), {EX: 10});
-    console.log('Cacheando os dados do PostgreSQL no Redis!');
+    // console.log('Cacheando os dados do PostgreSQL no Redis!');
 
     // Envia os dados como resposta
     res.render('problema/lista', {
