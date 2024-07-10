@@ -10,8 +10,8 @@ client.on('error', (err) => {
 
 // Conecta ao Redis e executa uma função quando a conexão estiver pronta
 client.on('connect', () => {
-  console.log('Connected to Redis!');
-  console.log('Caching list of Problemas for 10 seconds...');
+  // console.log('Connected to Redis!');
+  // console.log('Caching list of Problemas for 10 seconds...');
 });
 
 module.exports = client
