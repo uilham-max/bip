@@ -18,10 +18,10 @@ exports.RealizarLogin = ((req, res) =>{
     const mentor = DAOMentor.getOne({email: req.body.email})
     if (mentor) {
         req.session.usuario = {
-            id: estudante.id,
-            nome: estudante.nome,
-            email: estudante.email,
-            tipo: 'estudante',
+            id: mentor.id,
+            nome: mentor.nome,
+            email: mentor.email,
+            tipo: 'mentor',
         };
     console.log("Novo usuário na session:\n",req.session.usuario);
     res.redirect('/');
@@ -44,9 +44,16 @@ exports.CadastrarNovoMentor = ( async (req, res) =>{
     if (validator[0]){
         let enderecoString = JSON.stringify(endereco);
         try{
-            await DAOMentor.insert(nome, email, senha, cpf, enderecoString, areaConhecimento);
+            const newMentor = await DAOMentor.insert(nome, email, senha, cpf, enderecoString, areaConhecimento);
             res.status(200)
-            res.send('Mentor created!')
+            req.session.usuario = {
+            id: newMentor.id,
+            nome: newMentor.nome,
+            email: newMentor.email,
+            tipo: 'mentor',
+            };
+            console.log("Novo usuário na session:\n",req.session.usuario);
+            res.redirect('/');
         }catch(e){
             console.error(e)
             res.status(500);
