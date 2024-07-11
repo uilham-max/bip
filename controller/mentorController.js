@@ -1,12 +1,14 @@
 const DAOMentor = require('../database/DAOMentor');
 const { validaCadastroMentor } = require('../helpers/utilsMentor');
+const bcrypt = require('bcrypt');
 
 exports.RenderHomePageMentor = ((req, res) =>{
     res.send('200');
 });
 
 exports.RenderLogin = ((req, res) =>{
-    res.send('200')
+    res.render('mentor/login', {mensagem: ''});
+    return;
 });
 
 exports.RenderCadastro = ((req, res) =>{
@@ -14,19 +16,25 @@ exports.RenderCadastro = ((req, res) =>{
     return;
 });
 
-exports.RealizarLogin = ((req, res) =>{
-    const mentor = DAOMentor.getOne({email: req.body.email})
-    if (mentor) {
-        req.session.usuario = {
-            id: mentor.id,
-            nome: mentor.nome,
-            email: mentor.email,
-            tipo: 'mentor',
-        };
-    console.log("Novo usuário na session:\n",req.session.usuario);
-    res.redirect('/');
-    } else {
-    res.render('estudante/login', {mensagem: 'Usuário ou senha inválidos.'});
+exports.RealizarLogin = (async (req, res) =>{
+    let { email, senha } = req.body;
+    console.log(email, senha)
+    const mentor = await DAOMentor.getOne({ where: { email: email } });
+    if (mentor){
+        if (bcrypt.compareSync(senha, mentor.dataValues.senha)){
+            req.session.usuario = {
+                id: mentor.id,
+                nome: mentor.nome,
+                email: mentor.email,
+                tipo: 'mentor',
+            };
+            console.log("Novo usuário na session:\n",req.session.usuario);
+            res.redirect('/');
+        }else {
+            res.render('mentor/login', {mensagem: 'Usuário ou senha inválidos.'});
+        }
+    }else{
+        res.render('mentor/login', {mensagem: 'Usuário ou senha inválidos.'});
     }
 });
 
