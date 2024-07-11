@@ -4,7 +4,7 @@ const conexao = require('../database/conexao');
 const Demandante = require('./Demandante');
 
 const Problema = conexao.define('problema', {
-  descricao: Sequelize.STRING,
+  descricao: Sequelize.TEXT,
   dataSubmissao: Sequelize.DATEONLY,
   titulo: Sequelize.STRING,
   status: Sequelize.STRING,

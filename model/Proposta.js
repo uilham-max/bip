@@ -6,7 +6,7 @@ const Problema = require('./Problema');
 
 const Proposta = conexao.define('proposta', {
   titulo: Sequelize.STRING,
-  descricao: Sequelize.STRING,
+  descricao: Sequelize.TEXT,
   dataSubmissao: Sequelize.DATEONLY,
   areaConhecimento: Sequelize.STRING,
   problemaId: {
