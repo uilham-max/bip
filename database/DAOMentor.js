@@ -5,8 +5,9 @@ class DAOMentor {
 
     static async insert(nome, email, senha, cpf, endereco, areaConhecimento) {
         try {
-            cryptPass = bcrypt.hashSync(senha, 10)
-            const mentor = await Mentor.create({ nome, email, cryptPass, cpf, endereco, areaConhecimento });
+            let cryptPass = bcrypt.hashSync(senha, 10)
+            console.log(cryptPass)
+            const mentor = await Mentor.create({ nome: nome, email: email, senha: cryptPass, cpf: cpf, endereco: endereco, areaConhecimento:areaConhecimento });
             return mentor; // Return the created mentor
         } catch (error) {
             console.error(`Error on insert mentor ${nome}:`, error);

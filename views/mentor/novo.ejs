@@ -1,22 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <%-include('../partials/header.ejs')%>
-    <script src="/js/validaCPF.js" ></script>
     <script src="/js/consome_viacep.js" ></script>
-    <script src="/js/validar_senha.js" ></script>
+    <script src="/js/validaDadosFormularioCadastro.js" ></script>
 </head>
-<body  >
-    
-    <%-include('../partials/navbar.ejs')%>
-    
+<body>
+
     <div class="conteudo" >
         <div class="jumbotron junbotron-fluid">
-            <h1 class="display-4" >Bem-Vindo à página de cadastro</h1>
+            <h1 class="display-4" >Cadastro de Mentor</h1>
         </div>
         <div class="container" >
             <!--  -->
-            <form action="/demandante/novo" method="POST">
+            <form action="/mentor/cadastrar" method="POST">
                 <div class="lista-reboques">
 
 
@@ -40,7 +37,7 @@
                                          
                             <div class="form-group">
                                 <label for="cpf">CPF</label>
-                                <input class="form-control" id="cpf" type="text" name="cpf" required>
+                                <input class="form-control" id="cpf" type="text" name="cpf" maxlength="14" required>
                                 <div class="valid-feedback">
                                     <!-- Looks good! -->
                                 </div>
@@ -49,6 +46,16 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label for="areaConhecimento">Area de Conhecimento</label>
+                                <input class="form-control" id="areaConhecimento" type="text" name="areaConhecimento" required>
+                                <div class="valid-feedback">
+                                    <!-- Looks good! -->
+                                </div>
+                                <div class="invalid-feedback">
+                                    Preencha o campo.
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -61,7 +68,7 @@
 
                             <div class="form-group">
                                 <label for="cep">CEP</label>
-                                <input class="form-control" id="cep" type="text" name="cep" placeholder="Ex.: 96408560" required>
+                                <input class="form-control" id="cep" type="text" name="cep" placeholder="Ex.: 96408560" maxlength="9" required>
                                 <div class="valid-feedback">
                                     <!-- Looks good! -->
                                 </div>
@@ -74,7 +81,7 @@
 
                                 <div class="form-group col">
                                     <label for="logradouro">Rua</label>
-                                    <input class="form-control" id="logradouro" type="text" name="logradouro" required>
+                                    <input class="form-control" id="logradouro" type="text" name="rua" required>
                                     <div class="valid-feedback">
                                         <!-- Looks good! -->
                                     </div>
@@ -142,12 +149,12 @@
                     <!-- Dados do login -->
                     <div class="card card-reserva" style="width: 25rem;">
                         <div class="card-body">
-                            <h3 class="card-title">Informções de login</h3>
+                            <h3 class="card-title">Informações de Login</h3>
                             <hr>
                             <div class="form-group">
-                                <label for="email">Login</label>
+                                <label for="email">Email</label>
                                 <input class="form-control" id="email" type="email" name="email" >
-                                <small class="form-text text-muted">Informe o seu e-mail como login.</small>
+                                <small class="form-text text-muted">Somente emails academicos serão permitidos</small>
                                 <div class="valid-feedback">
                                     <!-- Looks good! -->
                                 </div>
@@ -159,7 +166,7 @@
                             <div class="form-group">
                                 <label for="senha">Senha</label>
                                 <input class="form-control" id="senha" type="password" name="senha" >
-                                <small class="form-text text-muted">No mínimo 8 dígitos.</small>
+                                <small class="form-text text-muted">Mínimo oito caracteres, pelo menos uma letra e um número</small>
                                 <div class="valid-feedback">
                                     <!-- Looks good! -->
                                 </div>
@@ -167,19 +174,6 @@
                                     Preencha o campo.
                                 </div>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="repeteSenha">Repita a Senha</label>
-                                <input class="form-control" id="repeteSenha" type="password" name="repeteSenha" >
-                                <div class="valid-feedback">
-                                    <!-- Looks good! -->
-                                </div>
-                                <div class="invalid-feedback">
-                                    Preencha o campo.
-                                </div>
-                            </div>
-
-                            
                             <br><p style="margin: 0.5rem;" >
                                 <input class="btn btn-primary" type="submit" value="Enviar">
                             </p>

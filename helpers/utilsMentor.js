@@ -1,6 +1,6 @@
 
 const dominios_de_email_permitidos = [
-    '@ifsul.edu.br'
+    'ifsul.edu.br'
 ]
 
 exports.validaCadastroMentor = (nome, email, senha, cpf, endereco, areaConhecimento) => {
@@ -23,14 +23,24 @@ exports.validaCadastroMentor = (nome, email, senha, cpf, endereco, areaConhecime
 
     // Mínimo oito caracteres, pelo menos uma letra e um número
     const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    if(!senha.test(regexPassword)){
-        return [false, "Senha fraca, não cumpre os requisitos minimos."]
+    if(!regexPassword.test(senha)){
+        return [false, "Senha fraca, mínimo oito caracteres, pelo menos uma letra e um número."]
     }
     
     // Verifica se email está dentro dos dominios permitidos
-    if (!email in dominios_de_email_permitidos){
-        return [false, "Dominio de email não permitido"];
+    let email_domain = email.split('@');
+    let email_confirmed = false;
+    dominios_de_email_permitidos.forEach((element)=>{
+        console.log(element, email_domain[1])
+        if(element === email_domain[1]){
+            email_confirmed = true;
+        }
+    })
+    console.log(email_confirmed)
+    if(email_confirmed){
+        return [true, "Mentor created!"]
+    }else{
+        return [false, "Dominio de email não valido!"]
     }
-
-    return [true, "Cadastro válido!"];
+    
 };
