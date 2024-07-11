@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     inputLocalidade = document.getElementById('localidade')
     inputMatricula = document.getElementById('matricula')
 
+    inputTitulo = document.getElementById('titulo')
+    inputDescricao =  document.getElementById('descricao')
+    inputDataInicio =  document.getElementById('dataInicio')
+    inputDataFim =  document.getElementById('dataFim')
+    inputInsumo =  document.getElementById('insumo')
+    inputCustoTotal =  document.getElementById('custoTotal')
+
+
     invalidNome = document.getElementById('invalidNome');
     invalidCPF = document.getElementById('invalidCPF')
     invalidEmail = document.getElementById('invalidEmail')
@@ -24,7 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
     invalidLocalidade = document.getElementById('invalidLocalidade')
     invalidMatricula = document.getElementById('invalidMatricula')
 
-
+    invalidTitulo = document.getElementById('invalidTitulo')
+    invalidDescricao =  document.getElementById('invalidDescricao')
+    invalidDataInicio =  document.getElementById('invalidDataInicio')
+    invalidDataFim =  document.getElementById('invalidDataFim')
+    invalidInsumo =  document.getElementById('invalidInsumo')
+    invalidCustoTotal =  document.getElementById('invalidCustoTotal')
 
 
     // FORMATA CPF
@@ -63,8 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
     inputMatricula.addEventListener('input', () => {
         // Obtém o valor atual do campo de input
         let value = inputMatricula.value.replace(/\./g, ''); // Remove pontos existentes
+        let matricula = value;
+
         let formattedValue = '';
-    
         // Verifica o comprimento do valor e formata adequadamente
         if (value.length <= 7) {
             formattedValue = value;
@@ -76,10 +90,29 @@ document.addEventListener('DOMContentLoaded', () => {
         inputMatricula.value = formattedValue;
     });
 
+    //VALIDA MATRICULA
+        //A matricula nao deve ter mais que 14 digitos
+        inputMatricula.addEventListener('blur', () => {
+            const matricula = inputMatricula.value;
+            const matriculaSemPontos = matricula.replace(/\./g, '');
+
+            if (matriculaSemPontos.length !== 14) {
+            inputMatricula.setCustomValidity('mensagem')
+            inputMatricula.classList.add('is-invalid')
+            invalidMatricula.textContent = 'Deve ter 14 dígitos.'
+            console.log(matricula)
+            return;
+        } else {
+            inputMatricula.setCustomValidity('')
+            inputMatricula.classList.remove('is-invalid')
+            invalidMatricula.textContent = ''
+            console.log(matricula)
+        }
+        })
+
 
     // VALIDA NOME
     inputNome.addEventListener('blur', () => {
-
         // Não permite numeros ou caracteres especiais
         if (!(/^[a-zA-ZÀ-ÿ\s]+$/.test(inputNome.value))) {
             inputNome.setCustomValidity('mensagem')
@@ -291,6 +324,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    // VALIDA TITULO
+    //VALIDA DESCRICAO
 
     'use strict'
 
