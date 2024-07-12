@@ -22,7 +22,7 @@ exports.validaCadastroMentor = (nome, email, senha, cpf, endereco, areaConhecime
     }
 
     // Mínimo oito caracteres, pelo menos uma letra e um número
-    const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,}$/;
     if(!regexPassword.test(senha)){
         return [false, "Senha fraca, mínimo oito caracteres, pelo menos uma letra e um número."]
     }
