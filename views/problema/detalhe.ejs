@@ -28,6 +28,9 @@
               <hr />
               <a href="/proposta/novo/<%=problema.id%>" class="btn btn-primary">Propor solução</a>
               <!-- <a href="/problema/detalhe/<%=problema.id%>" class="btn btn-outline-success">Ver propostas</a> -->
+              <% if (user.tipo == 'mentor') { %>
+              <a href="/problema/desativar/<%=problema.id%>" class="btn btn-danger">Desativar</a>
+              <% } %>
             </div>
           </div>
           <h3 class="display-4">Propostas para este problema</h3>
