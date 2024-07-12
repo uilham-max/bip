@@ -5,7 +5,12 @@
     <script src="/js/consome_viacep.js" ></script>
     <script src="/js/validaDadosFormularioCadastro.js" ></script>
 </head>
-<body  >
+<style>
+    #mensagem{
+        color: red;
+    }
+</style>
+<body>
     
     <%-include('../partials/navbar.ejs')%>
     
@@ -13,6 +18,8 @@
         <div class="jumbotron junbotron-fluid">
             <h1 class="display-4" >Cadastro de cliente</h1>
         </div>
+        <br>
+        <p id="mensagem"><strong><%= mensagem %></strong></p>
         <div class="container" >
             <!--  -->
             <form action="/estudante/novo" method="POST">
@@ -174,10 +181,10 @@
                     <!-- Dados do login -->
                     <div class="card card-reserva" style="width: 25rem;">
                         <div class="card-body">
-                            <h3 class="card-title">Informções de login</h3>
+                            <h3 class="card-title">Informações de Login</h3>
                             <hr>
                             <div class="form-group">
-                                <label for="email">Login</label>
+                                <label for="email">Email</label>
                                 <input class="form-control" id="email" type="email" name="email" >
                                 <small class="form-text text-muted">Informe o seu e-mail como login.</small>
                                 <div class="valid-feedback">

@@ -18,7 +18,6 @@ exports.RenderCadastro = ((req, res) =>{
 
 exports.RealizarLogin = (async (req, res) =>{
     let { email, senha } = req.body;
-    console.log(email, senha)
     const mentor = await DAOMentor.getOne({ where: { email: email } });
     if (mentor){
         if (bcrypt.compareSync(senha, mentor.dataValues.senha)){

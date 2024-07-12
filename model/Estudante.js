@@ -3,7 +3,11 @@ const conexao = require('../database/conexao');
 
 const Estudante = conexao.define('estudante', {
   nome: Sequelize.STRING,
-  email: Sequelize.STRING,
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true, 
+  },
   senha: Sequelize.STRING,
   cpf: Sequelize.STRING,
   curso: Sequelize.STRING,
