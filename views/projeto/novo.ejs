@@ -4,85 +4,109 @@
 </head>
 <body>
     <%-include('../partials/navbar.ejs')%>
-    <div class="'conteudo">
+    <div class="conteudo">
         <div class="jumbotron junbotron-fluid">
             <h1 class="display4">Registre seu projeto</h1>
         </div>
+
         <div class="container">
+        
             <form action="projeto/novo" method="POST">
-                <div class="lista=reboques">
+                <div class="lista-reboques">
+                    <!-- Dados do projeto -->
+                    <div class="card card-reserva">
+                        <div class="card-body">
+                            <h3 class="card-title">Informações do Projeto</h3>
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="titulo">Titulo</label>
+                                <input class="form-control" id="titulo" type="text" name="titulo" required>
+                                <div class="valid-feedback">
+                                    <!-- Looks good!-->
+                                </div>
+                                <div class="invalid-feedback">
+                                    <span id="invalidTitulo"></span>
+                                </div>                 
+                            </div>
 
-    
-                    <div class="form-group">
-                        <label for="titulo">Titulo</label>
-                        <input class="form-control" id="titulo" type="text" name="titulo" required>
-                        <div class="valid-feedback">
-                            <!-- Looks good!-->
+                            <div class="form-group">
+                                <label for="descricao">Descrição</label>
+                                <textarea class="form-control" placeholder="Descreva sua descrição aqui" id="floatingTextarea2" name="descricao" style="height: 100px"></textarea>
+                                <div class="valid-feedback">
+                                    <!-- Looks good!-->
+                                </div>
+                                <div class="invalid-feedback">
+                                    <span id="invalidDescricao"></span>
+                                </div>                 
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dataInicio">Data do Inicio</label>
+                                <input class="form-control" id="dataInicio" type="date" name="dataInicio" required>
+                                <div class="valid-feedback">
+                                    <!-- Looks good!-->
+                                </div>
+                                <div class="invalid-feedback">
+                                    <span id="invalidDataInicio"></span>
+                                </div>                 
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dataFim">Data do Fim</label>
+                                <input class="form-control" id="dataFim" type="date" name="dataFim" required>
+                                <div class="valid-feedback">
+                                    <!-- Looks good!-->
+                                </div>
+                                <div class="invalid-feedback">
+                                    <span id="invalidDataFim"></span>
+                                </div>                 
+                            </div>
+
+                            <div class="form-group">
+                                <label for="insumo">Insumo</label>
+                                <textarea class="form-control" placeholder="Descreva os insumos aqui" id="floatingTextarea2" name="insumo" style="height: 100px"></textarea>
+                                <div class="valid-feedback">
+                                    <!-- Looks good!-->
+                                </div>
+                                <div class="invalid-feedback">
+                                    <span id="invalidInsumo"></span>
+                                </div>                 
+                            </div>
+
+                            <div class="form-group">
+                                <label for="custoTotal">Custo Total</label>
+                                <input class="form-control" id="custoTotal" step="0.01" type="number" name="custoTotal" required>
+                                <div class="valid-feedback">
+                                    <!-- Looks good!-->
+                                </div>
+                                <div class="invalid-feedback">
+                                    <span id="invalidInsumo"></span>
+                                </div>                 
+                            </div>
+
+                            <p style="margin: 0.5rem;">
+                                <input class="btn btn-primary" type="submit" value="Enviar">
+                            </p>
                         </div>
-                        <div class="invalid-feedback">
-                            <span id="invalidTitulo"></span>
-                        </div>                 
                     </div>
 
-                    <div class="form-group">
-                        <label for="descricao">Descrição</label>
-                        <textarea class="form-control" placeholder="Descreva sua descrição aqui" id="floatingTextarea2" name="descricao" style="height: 100px"></textarea>
-                        <div class="valid-feedback">
-                            <!-- Looks good!-->
-                        </div>
-                        <div class="invalid-feedback">
-                            <span id="invalidDescricao"></span>
-                        </div>                 
-                    </div>
+                    <!-- Dados do demandante, estudante e outros-->
+                    <div class="card card-reserva" style="width: 25rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">Informações extras</h3>
+                            <hr>
+                            
+                        
+                            <h6>Titulo da proposta: <%=proposta.titulo%></h6>
 
-                    <div class="form-group">
-                        <label for="dataInicio">Data do Inicio</label>
-                        <input class="form-control" id="dataInicio" type="date" name="dataInicio" required>
-                        <div class="valid-feedback">
-                            <!-- Looks good!-->
                         </div>
-                        <div class="invalid-feedback">
-                            <span id="invalidDataInicio"></span>
-                        </div>                 
                     </div>
-
-                    <div class="form-group">
-                        <label for="dataFim">Data do Fim</label>
-                        <input class="form-control" id="dataFim" type="date" name="dataFim" required>
-                        <div class="valid-feedback">
-                            <!-- Looks good!-->
-                        </div>
-                        <div class="invalid-feedback">
-                            <span id="invalidDataFim"></span>
-                        </div>                 
-                    </div>
-
-                    <div class="form-group">
-                        <label for="insumo">Insumo</label>
-                        <textarea class="form-control" placeholder="Descreva os insumos aqui" id="floatingTextarea2" name="insumo" style="height: 100px"></textarea>
-                        <div class="valid-feedback">
-                            <!-- Looks good!-->
-                        </div>
-                        <div class="invalid-feedback">
-                            <span id="invalidInsumo"></span>
-                        </div>                 
-                    </div>
-
-                    <div class="form-group">
-                        <label for="custoTotal">Custo Total</label>
-                        <input class="form-control" id="custoTotal" step="0.01" type="number" name="custoTotal" required>
-                        <div class="valid-feedback">
-                            <!-- Looks good!-->
-                        </div>
-                        <div class="invalid-feedback">
-                            <span id="invalidInsumo"></span>
-                        </div>                 
-                    </div>
-
 
                 </div>
             </form>
         </div>
     </div>
+    
 </body>
 </html>

@@ -325,6 +325,16 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     // VALIDA TITULO
+   /* inputTitulo.addEventListener('blur', () => {
+        let titulo = inputTitulo.value
+        if(titulo.length > 50 || titulo.length <= 5){
+            input
+        }
+
+
+
+    })
+    */
     //VALIDA DESCRICAO
 
     'use strict'
