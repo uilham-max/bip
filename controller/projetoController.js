@@ -5,11 +5,13 @@ const {usuarioNome} = require('../helpers/getSessionNome.js');
 const getNovo = async (req, res) => {
   let propostaId = req.params.propostaId;
   let proposta = await DAOProposta.getOne(propostaId);
+  console.log(proposta)
   res.render('projeto/novo', {user: usuarioNome(req, res), proposta: proposta, mensagem: ''});
 };
 
 const postNovo = async (req, res) => {
   let {titulo, descricao, dataInicio, dataFim, insumo, custoTotal, propostaId, mentorId} = req.body
+  console.log(titulo, descricao, dataInicio, dataFim, insumo, custoTotal, propostaId, mentorId);
   let insert = DAOProjeto.insert(titulo, descricao, dataInicio, dataFim, insumo, custoTotal, propostaId, mentorId)
   if(!insert){
     return res.render('erro', {mensagem: 'Erro ao inserir Projeto.'})

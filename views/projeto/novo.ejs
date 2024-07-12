@@ -11,7 +11,7 @@
 
         <div class="container">
         
-            <form action="projeto/novo" method="POST">
+            <form action="/projeto/novo" method="POST">
                 <div class="lista-reboques">
                     <!-- Dados do projeto -->
                     <div class="card card-reserva">
@@ -85,6 +85,10 @@
                                 </div>                 
                             </div>
 
+
+                            <input type="hidden" name="propostaId" value="<%=proposta.id%>">
+                            <input type="hidden" name="mentorId" value="<%=user.id%>">
+
                             <p style="margin: 0.5rem;">
                                 <input class="btn btn-primary" type="submit" value="Enviar">
                             </p>
@@ -97,8 +101,12 @@
                             <h3 class="card-title">Informações extras</h3>
                             <hr>
                             
-                        
+                            
+                            <h6>Nome do demandante: <%=proposta.problema.demandante.nome%></h6>
+                            <h6>Email do demandante: <%=proposta.problema.demandante.email%></h6>
+                            <h6>Nome do estudante: <%=proposta.estudante.nome%></h6>
                             <h6>Titulo da proposta: <%=proposta.titulo%></h6>
+                            <h6>mentor id: <%=user.id%></h6>
 
                         </div>
                     </div>
