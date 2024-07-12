@@ -5,7 +5,7 @@ const {usuarioNome} = require('../helpers/getSessionNome.js');
 const getNovo = async (req, res) => {
   let propostaId = req.params.propostaId;
   let proposta = await DAOProposta.getOne(propostaId);
-  console.log(proposta)
+  console.log(proposta);
   res.render('projeto/novo', {user: usuarioNome(req, res), proposta: proposta, mensagem: ''});
 };
 
