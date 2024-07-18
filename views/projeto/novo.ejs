@@ -98,15 +98,52 @@
                     <!-- Dados do demandante, estudante e outros-->
                     <div class="card card-reserva" style="width: 25rem;">
                         <div class="card-body">
-                            <h3 class="card-title">Informações extras</h3>
+                            <h3 class="card-title">Informações da Proposta</h3>
                             <hr>
                             
-                            
-                            <h6>Nome do demandante: <%=proposta.problema.demandante.nome%></h6>
-                            <h6>Email do demandante: <%=proposta.problema.demandante.email%></h6>
-                            <h6>Nome do estudante: <%=proposta.estudante.nome%></h6>
-                            <h6>Titulo da proposta: <%=proposta.titulo%></h6>
-                            <h6>mentor id: <%=user.id%></h6>
+                            <div class="form-group">
+                                <label for="nomeDemandante">Nome do demandante</label>
+                                <input class="form-control" id="nomeDemandante" type="text" name="nomeDemandante" value="<%=proposta.problema.demandante.nome%>" disabled>
+                                <div class="valid-feedback">
+                                    <!-- Looks good!-->
+                                </div>
+                                <div class="invalid-feedback">
+                                    
+                                </div>                 
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nomeDemandante">Email do Demandante</label>
+                                <input class="form-control" id="emailDemandante" type="text" name="emailDemandante" value="<%=proposta.problema.demandante.email%>" disabled>
+                                <div class="valid-feedback">
+                                    <!-- Looks good!-->
+                                </div>
+                                <div class="invalid-feedback">
+                                    
+                                </div>                 
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nomeDemandante">Nome do Estudante</label>
+                                <input class="form-control" id="nomeEstudante" type="text" name="nomeEstudante" value="<%=proposta.estudante.nome%>" disabled>
+                                <div class="valid-feedback">
+                                    <!-- Looks good!-->
+                                </div>
+                                <div class="invalid-feedback">
+                                    
+                                </div>                 
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nomeDemandante">Nome da Proposta</label>
+                                <input class="form-control" id="propostaTitulo" type="text" name="propostaTitulo" value="<%=proposta.titulo%>" disabled>
+                                <div class="valid-feedback">
+                                    <!-- Looks good!-->
+                                </div>
+                                <div class="invalid-feedback">
+                                    
+                                </div>                 
+                            </div>
 
                         </div>
                     </div>
