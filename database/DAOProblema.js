@@ -52,14 +52,32 @@ class DAOProblema {
       //let problemas = await Problema.findAll({order: ['titulo'], include: {model: Demandante}});
       let problemas = await sequelize.query(
         `
-        SELECT prob.* 
-        FROM problema prob 
-        LEFT JOIN proposta prop
-          ON prob.id = prop."problemaId"
-        WHERE prop."projetoId" 
-          NOT IN (SELECT id from projeto); `,
-        {model: Problema, mapToModel: true, include: {model: Demandante}}
+      SELECT prob.*, dem.*
+      FROM problema prob
+      LEFT JOIN proposta prop
+        ON prob.id = prop."problemaId"
+      JOIN demandante dem
+        ON prob."demandanteId" = dem.id
+      WHERE prop."projetoId" 
+        NOT IN (SELECT id from projeto); `
       );
+      problemas = problemas[0];
+      problemas = problemas.map((result) => {
+        let problema = {
+          id: result.id,
+          titulo: result.titulo,
+          descricao: result.descricao,
+          dataSubmissao: result.dataSubmissao,
+          status: result.status,
+          demandante: {
+            id: result.demandanteId,
+            nome: result.nome,
+            // Se precisar de outros campos adicionar aqui
+          },
+        };
+        return problema;
+      });
+
       return problemas;
     } catch (error) {
       console.log(error.toString());
