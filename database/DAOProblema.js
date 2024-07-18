@@ -54,7 +54,7 @@ class DAOProblema {
         `
         SELECT prob.* 
         FROM problema prob 
-        JOIN proposta prop
+        LEFT JOIN proposta prop
           ON prob.id = prop."problemaId"
         WHERE prop."projetoId" 
           NOT IN (SELECT id from projeto); `,
