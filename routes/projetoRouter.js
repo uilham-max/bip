@@ -5,5 +5,6 @@ const {mentorAutorizacao} = require('../autorizacao/auth');
 
 router.get('/novo/:propostaId?', mentorAutorizacao, projetoController.getNovo);
 router.post('/novo', mentorAutorizacao, projetoController.postNovo);
+router.get('/lista', projetoController.getLista);
 
 module.exports = router;

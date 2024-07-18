@@ -16,10 +16,25 @@ const postNovo = async (req, res) => {
   if(!insert){
     return res.render('projeto/novo', {user: usuarioNome(req, res), mensagem: 'Erro ao iniciar Projeto.'})
   }
-  return res.render('projeto/novo', {user: usuarioNome(req, res), propostaId: 0, mensagem: 'Projeto iniciado com sucesso!'})
+  let projetos = await DAOProjeto.getAll()
+  if(!projetos){
+    return res.render('projeto/lista', {user: usuarioNome(req, res), projetos: projetos, mensagem: 'Erro ao listar Projetos.'})
+  }
+  return res.render('projeto/lista', {user: usuarioNome(req, res), projetos: projetos, mensagem: ''})
 };
+
+
+const getLista = async (req, res) => {
+  let projetos = await DAOProjeto.getAll()
+  console.log(projetos);
+  if(!projetos){
+    return res.render('projeto/lista', {user: usuarioNome(req, res), projetos: projetos, mensagem: 'Erro ao listar Projetos.'})
+  }
+  return res.render('projeto/lista', {user: usuarioNome(req, res), projetos: projetos, mensagem: ''})
+}
 
 module.exports = {
   getNovo,
   postNovo,
+  getLista,
 };

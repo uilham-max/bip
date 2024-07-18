@@ -1,4 +1,4 @@
-const {Projeto, Mentor} = require('../model/index');
+const {Projeto, Mentor, Proposta, Estudante} = require('../model/index');
 
 class DAOProjeto {
   static async insert(titulo, descricao, dataInicio, dataFim, insumo, custoTotal, propostaId, mentorId) {
@@ -55,7 +55,7 @@ class DAOProjeto {
 
   static async getAll() {
     try {
-      let projetos = await Projeto.findAll({order: ['titulo'], include: {model: Mentor}});
+      let projetos = await Projeto.findAll({order: ['titulo'], include: [{model: Mentor}, {model: Proposta}, {model: Estudante}]});
       return projetos;
     } catch (error) {
       console.log(error.toString());

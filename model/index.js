@@ -26,8 +26,8 @@ Estudante.hasMany(Proposta, {
 });
 Proposta.belongsTo(Estudante);
 
-Projeto.hasOne(Proposta);
-Proposta.belongsTo(Projeto);
+// Projeto.hasOne(Proposta);
+// Proposta.belongsTo(Projeto);
 
 Mentor.hasMany(Proposta, {
   onDelete: 'RESTRICT',
@@ -41,6 +41,19 @@ Projeto.hasMany(Etapa, {
 });
 Etapa.belongsTo(Projeto);
 
+// uilham
+  Mentor.hasMany(Projeto, {
+    onDelete: 'RESTRICT',
+    onUpdate: 'CASCADE',
+  })
+  Projeto.belongsTo(Mentor);
+
+  Projeto.hasMany(Proposta, {
+    onDelete: 'RESTRICT',
+    onUpdate: 'CASCADE',
+  });
+  Proposta.belongsTo(Projeto);
+//
 Projeto.belongsToMany(Estudante, {through: 'projeto_estudante'});
 Estudante.belongsToMany(Projeto, {through: 'projeto_estudante'});
 
