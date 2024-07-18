@@ -27,19 +27,7 @@ const getListarDemandantes = async (req, res) => {
 };
 
 const getLogin = async (req, res) => {
-  const demandante = await DAODemandante.login(req.body.email, req.body.senha);
-  if (demandante) {
-    req.session.usuario = {
-      id: demandante.id,
-      nome: demandante.nome,
-      email: demandante.email,
-      tipo: 'demandante',
-    };
-    console.log('Novo usuário na session:\n', req.session.usuario);
-    res.redirect('/');
-  } else {
-    res.render('demandante/login', {mensagem: 'Usuário ou senha inválidos.'});
-  }
+  res.render('demandante/login', {mensagem: ''});
 };
 
 const getLogout = async (req, res) => {
@@ -54,7 +42,7 @@ const postLogin = async (req, res) => {
       console.log(demandante.email, demandante.senha);
       if (bcrypt.compareSync(senha, demandante.senha)) {
         console.log('teste 1');
-        req.session.usuario = {id: demandante.id, nome: demandante.nome, email: demandante.email};
+        req.session.usuario = {id: demandante.id, nome: demandante.nome, email: demandante.email, tipo: 'demandante'};
         console.log(req.session.usuario.nome, 'fez login...');
         res.redirect('/');
       } else {

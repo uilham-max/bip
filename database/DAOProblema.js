@@ -1,4 +1,5 @@
 const {Problema, Demandante, Proposta, Estudante} = require('../model/index');
+const sequelize = require('../database/conexao');
 
 class DAOProblema {
   static async insert(descricao, dataSubmissao, titulo, status, demandanteId) {
@@ -48,7 +49,17 @@ class DAOProblema {
 
   static async getAll() {
     try {
-      let problemas = await Problema.findAll({order: ['titulo'], include: {model: Demandante}});
+      //let problemas = await Problema.findAll({order: ['titulo'], include: {model: Demandante}});
+      let problemas = await sequelize.query(
+        `
+        SELECT prob.* 
+        FROM problema prob 
+        JOIN proposta prop
+          ON prob.id = prop."problemaId"
+        WHERE prop."projetoId" 
+          NOT IN (SELECT id from projeto); `,
+        {model: Problema, mapToModel: true, include: {model: Demandante}}
+      );
       return problemas;
     } catch (error) {
       console.log(error.toString());

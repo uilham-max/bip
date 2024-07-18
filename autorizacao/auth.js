@@ -1,4 +1,5 @@
 function demandanteAutorizacao(req, res, next) {
+  console.log('Session: ', req.session.usuario);
   if (req.session.usuario.tipo == 'demandante') {
     console.log('Usuario na session: ', req.session.user);
     next();

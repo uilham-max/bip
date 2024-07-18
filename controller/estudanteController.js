@@ -1,6 +1,6 @@
 const DAOEstudante = require('../database/DAOEstudante');
 const {usuarioNome} = require('../helpers/getSessionNome');
-const { validaCadastroEstudante } = require('../helpers/utilsEstudante');
+const {validaCadastroEstudante} = require('../helpers/utilsEstudante');
 
 const getListarEstudantes = async (req, res) => {
   let demandantes = await DAODemandante.getAll();
@@ -24,7 +24,7 @@ const postLogin = async (req, res) => {
       email: estudante.email,
       tipo: 'estudante',
     };
-    console.log("Novo usuário na session:\n",req.session.usuario);
+    console.log('Novo usuário na session:\n', req.session.usuario);
     res.redirect('/');
   } else {
     res.render('estudante/login', {mensagem: 'Usuário ou senha inválidos.'});
@@ -47,20 +47,24 @@ const getEditarEstudante = async (req, res) => {
 
 const postNovoEstudante = async (req, res) => {
   const {nome, email, senha, repeteSenha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa} = req.body;
-  
+
   let validator = validaCadastroEstudante(nome, email, senha, repeteSenha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa);
-  
-  if (validator[0]){
+  console.log(validator);
+  if (validator[0]) {
     let newEstudante = await DAOEstudante.insert(nome, email, senha, cpf, curso, semestre, matricula, cep, logradouro, complemento, bairro, localidade, uf, numeroDaCasa);
     if (newEstudante) {
+      console.log('1');
       res.render('estudante/login', {mensagem: 'Usuário criado com sucesso'});
     } else {
+      console.log('2');
+
       res.render('estudante/novo', {
         user: usuarioNome(req, res),
         mensagem: 'Não foi possivel criar o usuario',
       });
     }
-  }else{
+  } else {
+    console.log('3');
     res.render('estudante/novo', {
       user: usuarioNome(req, res),
       mensagem: validator[1],
