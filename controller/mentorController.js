@@ -1,4 +1,6 @@
 const DAOMentor = require('../database/DAOMentor');
+const {usuarioNome} = require('../helpers/getSessionNome');
+
 const {validaCadastroMentor} = require('../helpers/utilsMentor');
 const bcrypt = require('bcrypt');
 
@@ -12,7 +14,7 @@ exports.RenderLogin = (req, res) => {
 };
 
 exports.RenderCadastro = (req, res) => {
-  res.render('mentor/novo');
+  res.render('mentor/novo', {user: usuarioNome(req, res), mensagem: ''} );
   return;
 };
 
