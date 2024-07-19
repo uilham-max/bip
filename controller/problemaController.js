@@ -7,8 +7,9 @@ const util = require('util')
 
 const getDetalhe = async (req, res) => {
   let problemaId = req.params.problemaId;
+  console.log(problemaId);
   let problema = await DAOProblema.getOne(problemaId);
-  console.log('Estudante:', problema.proposta);
+  console.log('Problema:', problema);
   if (!problema) {
     res.render('problema/detalhe', {
       user: usuarioNome(req, res),
@@ -31,13 +32,14 @@ const getLista = async (req, res) => {
     if (cacheData) {
       // Se os dados estão no cache, parseia e envia como resposta
       problemas = JSON.parse(cacheData);
+      console.log(problemas);
       console.log('Pegando do Redis os dados cacheados!');
       return res.render('problema/lista', {user: usuarioNome(req, res), problemas: problemas, mensagem: ''});
     }
     console.log('Dados não encontrados no cache, buscando no PostgreSQL...');
     // Se não estão no cache, busca do banco de dados
     problemas = await DAOProblema.getAll();
-    console.log("problemaController getLista: ", problemas);
+    console.log(problemas);
     if (!problemas || problemas.length === 0) {
       const mensagem = !problemas ? 'Erro ao buscar a lista de problemas.' : 'Lista vazia.';
       return res.render('problema/lista', {user: usuarioNome(req, res), problemas: [], mensagem: mensagem});

@@ -61,8 +61,11 @@ class DAOProblema {
       WHERE NOT EXISTS 
       (SELECT 1 from projeto proj WHERE proj."propostaId" = prop.id); `
       );
+      // console.log('teste1 :', problemas);
       problemas = problemas[0];
+      // console.log('teste2 :', problemas);
       problemas = problemas.map((result) => {
+        console.log(result);
         console.log(result);
         let problema = {
           id: result.id,
@@ -71,7 +74,7 @@ class DAOProblema {
           dataSubmissao: result.dataSubmissao,
           status: result.status,
           demandante: {
-            id: result.did,
+            demandanteId: result.demandanteId,
             nome: result.nome,
             // Se precisar de outros campos adicionar aqui
           },
@@ -79,6 +82,8 @@ class DAOProblema {
         //console.log('Problema:', problema);
         return problema;
       });
+
+      // console.log('teste3 :', problemas);
 
       return problemas;
     } catch (error) {
