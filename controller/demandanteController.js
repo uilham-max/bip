@@ -37,21 +37,19 @@ const getLogout = async (req, res) => {
 
 const postLogin = async (req, res) => {
   let {email, senha} = req.body;
+  console.log(email, senha);
   DAODemandante.login(email).then((demandante) => {
     if (demandante) {
       console.log(demandante.email, demandante.senha);
       if (bcrypt.compareSync(senha, demandante.senha)) {
-        console.log('teste 1');
         req.session.usuario = {id: demandante.id, nome: demandante.nome, email: demandante.email, tipo: 'demandante'};
         console.log(req.session.usuario.nome, 'fez login...');
         res.redirect('/');
       } else {
-        console.log('teste 2');
-        res.render('login', {mensagem: 'Usuário ou senha inválidos.'});
+        res.render('demandante/login', {mensagem: 'Usuário ou senha inválidos.'});
       }
     } else {
-      console.log('teste 3');
-      res.render('login', {mensagem: 'Usuário ou senha inválidos.'});
+      res.render('demandante/login', {mensagem: 'Usuário ou senha inválidos.'});
     }
   });
 };

@@ -58,10 +58,12 @@ class DAOProblema {
         ON prob.id = prop."problemaId"
       JOIN demandante dem
         ON prob."demandanteId" = dem.id
-      WHERE prop."projetoId" 
-        NOT IN (SELECT id from projeto); `
+      WHERE NOT EXISTS 
+      (SELECT 1 from projeto proj WHERE proj."propostaId" = prop.id); `
       );
+      console.log('teste1 :', problemas);
       problemas = problemas[0];
+      console.log('teste2 :', problemas);
       problemas = problemas.map((result) => {
         let problema = {
           id: result.id,
@@ -75,9 +77,10 @@ class DAOProblema {
             // Se precisar de outros campos adicionar aqui
           },
         };
-        console.log("DAOProblemas.getAll(): ",problema);
         return problema;
       });
+
+      console.log('teste3 :', problemas);
 
       return problemas;
     } catch (error) {
