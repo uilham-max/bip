@@ -1,3 +1,4 @@
+const { mentorAutorizacao } = require('../autorizacao/auth.js');
 const DAOProjeto = require('../database/DAOProjeto.js');
 const DAOProposta = require('../database/DAOProposta.js');
 const {usuarioNome} = require('../helpers/getSessionNome.js');
