@@ -37,6 +37,7 @@ const getLista = async (req, res) => {
     console.log('Dados não encontrados no cache, buscando no PostgreSQL...');
     // Se não estão no cache, busca do banco de dados
     problemas = await DAOProblema.getAll();
+    console.log("problemaController getLista: ", problemas);
     if (!problemas || problemas.length === 0) {
       const mensagem = !problemas ? 'Erro ao buscar a lista de problemas.' : 'Lista vazia.';
       return res.render('problema/lista', {user: usuarioNome(req, res), problemas: [], mensagem: mensagem});

@@ -75,6 +75,7 @@ class DAOProblema {
             // Se precisar de outros campos adicionar aqui
           },
         };
+        console.log("DAOProblemas.getAll(): ",problema);
         return problema;
       });
 
